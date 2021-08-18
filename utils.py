@@ -95,11 +95,11 @@ def build_nlp(model="en_core_web_sm", disable=None,
 
     target_matcher = TargetMatcher(nlp)
     if add_target_rules:
-        from .rehoused_resources.ssvf_rules import ssvf_rules
-        target_matcher.add(ssvf_rules.rules)
+        from .rehoused_resources.target_rules import target_rules
+        target_matcher.add(target_rules.rules)
     nlp.add_pipe(target_matcher)
 
-    # Add cycontext
+    # Add ConText
     from medspacy.context import ConTextComponent
     context = ConTextComponent(nlp, rules=rules, add_attrs=CONTEXT_ATTRS, remove_overlapping_modifiers=True,
                                use_context_window=use_context_window, max_scope=max_scope)
