@@ -1,4 +1,4 @@
-from nlp_tools.nlp_postprocessor import postprocessing_functions
+from medspacy.postprocess import postprocessing_functions
 import re
 """This module contains callback functions to be used in spaCy's matcher classes."""
 

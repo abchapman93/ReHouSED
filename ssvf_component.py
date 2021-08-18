@@ -1,5 +1,3 @@
-from .utils import prune_overlapping_matches, overlaps
-
 from spacy.tokens import Token
 from spacy.tokens import Span
 from spacy.tokens import Doc
@@ -215,6 +213,4 @@ class SSVFDocumentClassifier:
 
         classification = self.classify_doc(doc)
         doc._.document_classification = classification
-        doc._.ssvf_data["document_classification2"] = self.classify_doc2(doc)
-        doc._.ssvf_data["document_classification3"] = self.classify_doc3(doc)
         return doc

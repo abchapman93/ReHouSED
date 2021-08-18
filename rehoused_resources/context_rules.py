@@ -1,5 +1,5 @@
 from medspacy.context import ConTextRule
-from src import constants
+from .. import constants
 from . import callbacks
 
 
@@ -184,7 +184,7 @@ context_rules = [
                 ]),
     ConTextRule("eligible for", "HYPOTHETICAL", direction="forward", allowed_types=["EVIDENCE_OF_HOUSING", "HOMELESSNESS_HEALTHCARE_SERVICE"]),
     ConTextRule("in need of", "HYPOTHETICAL", direction="forward", allowed_types={"EVIDNECE_OF_HOUSING", "TEMPORARY_HOUSING"}),
-    ConTextRule("need", "HYPOTHETICAL", direction="forward", pattern=[{"LEMMA": "needs"}], allowed_types={"EVIDENCE_OF_HOUSING", "TEMPORARY_HOUSING"}),
+    ConTextRule("need", "HYPOTHETICAL", direction="forward", pattern=[{"LEMMA": "need"}], allowed_types={"EVIDENCE_OF_HOUSING", "TEMPORARY_HOUSING"}),
     ConTextRule("will be", "HYPOTHETICAL", direction="forward", excluded_types={"RISK_OF_HOMELESSNESS"}),
     ConTextRule("proposed", "HYPOTHETICAL", direction="forward"),
     ConTextRule("propose", "HYPOTHETICAL", direction="forward"),
@@ -441,8 +441,8 @@ context_rules = [
     ]),
 
     ConTextRule("was accepted", "ACCEPTED", pattern=[{"LOWER": {"IN": ["was", "been"]}, "OP": "?"}, {"LOWER": "accepted"}, {"LOWER": {"IN": ["to", "into"]}, "OP": "?"}]),
-    ConTextRule("approved", "ACCEPTED", rule="FORWARD", pattern=[{"LOWER": "approved"}, {"LOWER": "for", "OP": "?"},]),
-    ConTextRule("could be approved", "HYPOTHETICAL", rule="FORWARD"),
+    ConTextRule("approved", "ACCEPTED", direction="FORWARD", pattern=[{"LOWER": "approved"}, {"LOWER": "for", "OP": "?"},]),
+    ConTextRule("could be approved", "HYPOTHETICAL", direction="FORWARD"),
 
     ConTextRule("enrolled", "ENROLLMENT", "FORWARD",
                 pattern=[
@@ -456,7 +456,7 @@ context_rules = [
                     {"LOWER": "any"},
                     {"LOWER": {"IN": ["concerns", "issues", "problems"]}},
                 ]),
-    ConTextRule("is able to afford", "POSITIVE_HOUSING", rule="FORWARD",
+    ConTextRule("is able to afford", "POSITIVE_HOUSING", direction="FORWARD",
                 pattern=[
                     {"LEMMA": "be"},
                     {"LOWER": "able"},
@@ -472,7 +472,7 @@ context_rules = [
                     {"LOWER": "with"},
                 ]),
 
-    ConTextRule("once he is able to afford", "HYPOTHETICAL", rule="FORWARD",
+    ConTextRule("once he is able to afford", "HYPOTHETICAL", direction="FORWARD",
                 pattern=[
                     {"LOWER": {"IN": ["once", "when"]}},
                     {"OP": "?"},

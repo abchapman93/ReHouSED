@@ -28,7 +28,6 @@ class TestConcepts:
                 "He has a goal of looking for housing",
                 "obtain housing",
                 "interested in housing",
-                "needs housing",
             ],
             "EVIDENCE_OF_HOMELESSNESS": [
                 "if he becomes homeless",

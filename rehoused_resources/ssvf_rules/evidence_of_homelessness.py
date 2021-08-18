@@ -40,22 +40,7 @@ homeless_rules = [
                    {"IS_TITLE": True, "OP": "+"},
                    {"LOWER": "park"}
                ]),
-    TargetRule("At least 1 night", "EVIDENCE_OF_HOMELESSNESS"), # Answer to template "How long have you been homeless?"
-    TargetRule("How long have you been homeless? ", "EVIDENCE_OF_HOMELESSNESS",
-               pattern= [
-                   {"LOWER": "how"},
-                   {"LOWER": "long"},
-                   {"LOWER": "have"},
-                   {"LOWER": "you"},
-                   {"LOWER": "been"},
-                   {"LOWER": "homeless"},
-                   {"LOWER": "?"},
-                   {"IS_SPACE": True, "OP": "*"},
-                   {"LIKE_NUM": True, "OP": "+"},
-                   {"LOWER": {"REGEX": r"^(day|week|month|year)"}}
-               ],
-               # pattern=r"How long have you been homeless\?[\s]+[\d]"
-               ),
+
     TargetRule("Is veteran currently homeless? No", "EVIDENCE_OF_HOMELESSNESS",
                attributes={"is_negated": True},
                pattern=[
@@ -109,14 +94,6 @@ homeless_rules = [
     TargetRule("v60.0", "EVIDENCE_OF_HOMELESSNESS", attributes={"is_historical": True}), # ICD-9
     TargetRule("Lack of Housing (ICD-9-CM V60.0)", "EVIDENCE_OF_HOMELESSNESS", attributes={"is_historical": True}),
     TargetRule("No - Not living in stable housing", "EVIDENCE_OF_HOMELESSNESS"),
-    TargetRule("Did the Veteran enter the HUD-VASH program?  Yes", "EVIDENCE_OF_HOMELESSNESS"),
-    TargetRule("Admitted to HUD-VASH", "EVIDENCE_OF_HOMELESSNESS",
-               pattern=[
-                   {"LOWER": "admitted"},
-                   {"LOWER": {"IN": ["to", "into"]}},
-                   {"OP": "?"},
-                   {"_": {"concept_tag": "HUD-VASH"}, "OP":"+"},
-               ]),
 
     TargetRule("Homeless single person (SCT 160700001)", "EVIDENCE_OF_HOMELESSNESS", attributes={"is_historical": True}),
     TargetRule("Homeless single person", "EVIDENCE_OF_HOMELESSNESS", attributes={"is_historical": True}),
@@ -153,10 +130,6 @@ homeless_rules = [
                       {"LOWER": "?"}, {"LOWER": "-"},
                       {"IS_SPACE": True, "OP": "*"},
                       {"LOWER": "yes"}]),
-    TargetRule("Veteran Meets Homeless Criteria:", "EVIDENCE_OF_HOMELESSNESS", on_match=callbacks.parse_question_response_checkmark_right_yes),
-    # If this one is not followed by 'Yes [X]', it will be removed and will allow
-    # the shorter "CHRONICALLY Homeless" entity to match
-    TargetRule("Veteran is CHRONICALLY Homeless:", "IGNORE", on_match=callbacks.parse_question_response_checkmark_right_not_yes),
     TargetRule("does not know where they will be staying", "EVIDENCE_OF_HOMELESSNESS",
              pattern=[
                  {"LOWER": "does"},
@@ -262,38 +235,7 @@ homeless_rules = [
 
     TargetRule("squatting", "EVIDENCE_OF_HOMELESSNESS", pattern=[{"LOWER": {"IN": ["squatting", "squatted"]}}]),
     TargetRule("was homeless", "EVIDENCE_OF_HOMELESSNESS",
-               attributes={"is_historical": True}),
-
-    TargetRule("section 8 voucher", "EVIDENCE_OF_HOMELESSNESS"),
-    TargetRule("HUD-VASH voucher", "EVIDENCE_OF_HOMELESSNESS",
-               pattern=[
-                   {"LOWER": "hud", "OP": "?"},
-                   {"LOWER": {"IN": ["/","-"]}, "OP": "?"},
-                   {"LOWER": "vash"},
-                   {"LOWER": "voucher"}
-               ]),
-    TargetRule("housing choice voucher", "EVIDENCE_OF_HOMELESSNESS",
-               pattern=[
-                   {"LOWER": "housing", "OP": "?"},
-                   {"LOWER": "choice"},
-                   {"LOWER": "voucher"}
-               ]
-               ),
-    TargetRule("housing choice voucher", "EVIDENCE_OF_HOMELESSNESS",
-               pattern=[
-                   {"LOWER": "housing"},
-                   {"OP": "?"},
-                   {"LOWER": "voucher"}
-               ]
-               ),
-    TargetRule("admitted to hud-vash", "EVIDENCE_OF_HOMELESSNESS",
-               pattern=[
-                   {"LOWER": {"REGEX": r"(admit|admission)"}},
-                   {"LOWER": "to"},
-                   {"_": {"concept_tag": "HUD-VASH"}, "OP": "+"},
-               ]),
-    TargetRule("Is the Veteran entering a residential treatment program? Yes", "EVIDENCE_OF_HOMELESSNESS",
-               pattern=r"Is the Veteran entering a residential treatment program\?[\s]+Yes"),
+               attributes={"is_historical": True}),\
     TargetRule("<ADJ> homeless individuals", "IGNORE",
                pattern=[
                    {"POS": {"IN": ["ADJ", "ADV"]}, "OP": "*"},

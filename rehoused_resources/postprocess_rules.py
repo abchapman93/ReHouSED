@@ -1,11 +1,49 @@
-# from ..nlp_postprocessor import PostprocessingRule, PostprocessingPattern
-# from ..nlp_postprocessor import postprocessing_functions as ssvf_postprocessing_functions
 from medspacy.postprocess import PostprocessingRule, PostprocessingPattern
-from src import constants
-from src.nlp.resources import callbacks, postprocessing_functions
+from .. import constants
+from . import callbacks
+
+from medspacy.postprocess import postprocessing_functions
 
 import re
 
+def is_preceded_by(ent, target, window=1):
+    """Check if an entity is preceded by a target word within a certain window.
+    Case-insensitive.
+    If any phrases in target are more than one token long, this may not capture it
+    if window is smaller than the number of tokens.
+    ent (Span):  A spaCy Span
+    target (str or iterable): Either a single string or iterable of strings.
+        If an iterable, will return True if any of the strings are in the window
+        preceding ent.
+    """
+    preceding_span = ent.doc[max((ent.start - window, 0)): ent.start]
+    preceding_string = " ".join([token.lower_ for token in preceding_span])
+
+    if isinstance(target, str):
+        return re.search(target.lower(), preceding_string) is not None
+    for string in target:
+        if re.search(string.lower(), preceding_string):
+            return True
+    return False
+
+def is_followed_by(ent, target, window=1):
+    """Check if an entity is followed by a target word within a certain window.
+    Case-insensitive.
+    If any phrases in target are more than one token long, this may not capture it
+    if window is smaller than the number of tokens.
+    ent (Span):  A spaCy Span
+    target (str or iterable): Either a single string or iterable of strings.
+        If an iterable, will return True if any of the strings are in the window
+        following ent.
+    """
+    following_span = ent.doc[ent.end: ent.end+window]
+    following_string = " ".join([token.lower_ for token in following_span])
+    if isinstance(target, str):
+        return re.search(target.lower(), following_string) is not None
+    for string in target:
+        if re.search(string.lower(), following_string):
+            return True
+    return False
 
 # Functions
 def is_ignored(ent):
@@ -19,6 +57,9 @@ def is_ignored(ent):
 def set_attribute(ent, i, attribute, value):
     setattr(ent._, attribute, value)
 
+def set_ignored(ent, i, value=True):
+    set_attribute(ent, i, "is_ignored", value)
+
 def change_label_need_housing(ent, i):
     """If an 'EVIDENCE_OF_HOUSING' entity is modified by 'need', change the label
     to either 'RISK_OF_HOMELESSNESS' or 'EVIDENCE_OF_HOMELESSNESS'.
@@ -28,16 +69,26 @@ def change_label_need_housing(ent, i):
     postprocessing_functions.set_label(ent, i, "EVIDENCE_OF_HOMELESSNESS")
 
 def change_hypothetical_phrase_housing(ent, i):
-    postprocessing_functions.set_ignored(ent, i, False)
+    set_ignored(ent, i, False)
     postprocessing_functions.set_hypothetical(ent, i, True)
 
 def change_negated_stable_housing_to_homelessness(ent, i):
     postprocessing_functions.set_label(ent, i, "EVIDENCE_OF_HOMELESSNESS")
     postprocessing_functions.set_negated(ent, i, False)
-    postprocessing_functions.set_ignored(ent, i, False)
+    set_ignored(ent, i, False)
     for token in ent:
         token._.ignore = False
 
+def contains_concept_tag(span, tag):
+    for token in span:
+        if token._.concept_tag == tag:
+            return True
+    return False
+
+def sentence_contains_ent_label(ent, target_label):
+    ents = ent.sent.ents
+    ent_labels = {ent.label_ for ent in ents}
+    return target_label in ent_labels
 
 rules = [
 
@@ -61,11 +112,11 @@ rules = [
             PostprocessingPattern(lambda ent: ent.lower_ == "housing"),
             PostprocessingPattern(lambda ent: ent.label_ == "EVIDENCE_OF_HOUSING"),
             (
-                PostprocessingPattern(postprocessing_functions.is_preceded_by, condition_args=(r"found",2),),
+                PostprocessingPattern(is_preceded_by, condition_args=(r"found",2),),
                 PostprocessingPattern(postprocessing_functions.is_modified_by_category, condition_args=("POSITIVE_HOUSING",)),
             ),
         ],
-        action=postprocessing_functions.set_ignored,
+        action=set_ignored,
         action_args=(False,),
         description="If the generic phrase 'housing' is preceded by 'found' or modified by 'positive housing', allow it to be used as evidence of housing."
     ),
@@ -78,12 +129,12 @@ rules = [
             (
                 PostprocessingPattern(lambda ent: ent._.window(2)._.contains(r"(furniture|furnish)")),
 
-                PostprocessingPattern(postprocessing_functions.is_preceded_by, condition_args=(r"found", 2)),
+                PostprocessingPattern(is_preceded_by, condition_args=(r"found", 2)),
                 PostprocessingPattern(postprocessing_functions.is_modified_by_category,
                                           condition_args=("POSITIVE_HOUSING",)),
             )
         ],
-        action=postprocessing_functions.set_ignored,
+        action=set_ignored,
         action_args=(False,),
         description="Require a modifier for the exact phrase 'home'"
     ),
@@ -102,9 +153,9 @@ rules = [
     PostprocessingRule(
         patterns=[
             PostprocessingPattern(lambda ent: ent.lower_.endswith("housing")),
-            PostprocessingPattern(postprocessing_functions.is_followed_by, condition_args=(r"situation",)),
+            PostprocessingPattern(is_followed_by, condition_args=(r"situation",)),
         ],
-        action=postprocessing_functions.set_ignored,
+        action=set_ignored,
         action_args=(True,),
         description="Ignore entities overlapping with 'housing situation'"
     ),
@@ -121,10 +172,10 @@ rules = [
         patterns=[
             PostprocessingPattern(lambda ent: ent._.contains(r"(rental|housing) assistance", regex=True, case_insensitive=True)),
             PostprocessingPattern(lambda ent: ent.label_ == "EVIDENCE_OF_HOUSING"),
-            PostprocessingPattern(postprocessing_functions.is_preceded_by, condition_args=("receive", True), success_value=False),
+            PostprocessingPattern(is_preceded_by, condition_args=("receive", True), success_value=False),
         ],
         # action=postprocessing_functions.remove_ent,
-        action=postprocessing_functions.set_ignored, action_args=(True,),
+        action=set_ignored, action_args=(True,),
         description="Consider 'rental assistance' to be 'evidence of housing' only if it is being received"
     ),
 
@@ -134,7 +185,7 @@ rules = [
             PostprocessingPattern(lambda ent: postprocessing_functions.is_modified_by_text(ent, "need")),
             PostprocessingPattern(lambda ent: ent._.section_category == "patient_needs",),
          ),
-        PostprocessingPattern(postprocessing_functions.is_preceded_by, condition_args=("maintain", 5), success_value=False),
+        PostprocessingPattern(is_preceded_by, condition_args=("maintain", 5), success_value=False),
         PostprocessingPattern(postprocessing_functions.span_contains, condition_args=("housing",)),
     ],
         action=postprocessing_functions.set_hypothetical, action_args=(True,),
@@ -146,7 +197,7 @@ rules = [
             PostprocessingPattern(lambda ent: ent.label_ == "EVIDENCE_OF_HOUSING"),
 
             PostprocessingPattern(lambda ent: ent._.section_category in ("patient_goals", "patient_needs")),
-            PostprocessingPattern(postprocessing_functions.is_preceded_by, condition_args=("maintain", 5), success_value=False),
+            PostprocessingPattern(is_preceded_by, condition_args=("maintain", 5), success_value=False),
             PostprocessingPattern(lambda ent: ent._.contains("resid|liv|maintain", regex=True, case_insensitive=True), success_value=False),
         ],
         # action=change_label_need_housing,
@@ -163,7 +214,7 @@ rules = [
                 PostprocessingPattern(postprocessing_functions.is_modified_by_text, condition_args=("goals|want",)),
             ),
             (
-                PostprocessingPattern(postprocessing_functions.is_preceded_by, condition_args=("maintain", 5),
+                PostprocessingPattern(is_preceded_by, condition_args=("maintain", 5),
                                   success_value=True),
                 PostprocessingPattern(lambda ent: ent._.contains("maintain", regex=True, case_insensitive=True),
                                   success_value=True)
@@ -201,7 +252,7 @@ rules = [
             PostprocessingPattern(postprocessing_functions.is_modified_by_text, condition_args=("screen",)),
 
         ],
-        action=postprocessing_functions.set_ignored,
+        action=set_ignored,
         action_args=(True,),
         description="If a patient is being screened for temporary housing, ignore it."
     ),
@@ -210,12 +261,12 @@ rules = [
         patterns=[
             PostprocessingPattern(postprocessing_functions.span_contains, condition_args=(r"\b(rent|deposit)\b",)),
 
-            PostprocessingPattern(postprocessing_functions.is_preceded_by,condition_args=(r"my",), success_value=False),
+            PostprocessingPattern(is_preceded_by,condition_args=(r"my",), success_value=False),
             PostprocessingPattern(postprocessing_functions.is_modified_by_category, condition_args=(r"PAYMENT",), success_value=False),
-            PostprocessingPattern(postprocessing_functions.is_preceded_by, condition_args=(r"(pay|paid)", 5), success_value=False),
+            PostprocessingPattern(is_preceded_by, condition_args=(r"(pay|paid)", 5), success_value=False),
             PostprocessingPattern(postprocessing_functions.span_contains, condition_args=(r"(current on|behind [io]n|paid)",), success_value=False),
                     ],
-        action=postprocessing_functions.set_ignored,
+        action=set_ignored,
         description="Only allow 'rent' or 'deposit' to be evidence of housing if it is modified by a phrase like 'paid' "
                     "or if it is 'my rent'",
     ),
@@ -252,22 +303,22 @@ rules = [
             PostprocessingPattern(lambda ent: ent.label_ == "EVIDENCE_OF_HOUSING"),
             PostprocessingPattern(postprocessing_functions.span_contains, condition_args=("house",)),
             (
-                PostprocessingPattern(postprocessing_functions.is_preceded_by, condition_args=("(his|her)", 10)),
+                PostprocessingPattern(is_preceded_by, condition_args=("(his|her)", 10)),
                 PostprocessingPattern(postprocessing_functions.span_contains, condition_args=("(his|her)",)),
             ),
             PostprocessingPattern(callbacks.resolve_family_coreference, success_value=True)
         ],
-        action=postprocessing_functions.set_ignored,
+        action=set_ignored,
         description="Avoid phrases like 'his house' which are referring to a friend or family member."
     ),
 
     PostprocessingRule(
         [
             PostprocessingPattern(lambda ent: ent.label_ == "DOUBLING_UP"),
-            PostprocessingPattern(postprocessing_functions.contains_concept_tag, condition_args=("FAMILY",)),
+            PostprocessingPattern(contains_concept_tag, condition_args=("FAMILY",)),
             PostprocessingPattern(postprocessing_functions.sentence_contains, condition_args=("stay|crash",), success_value=False),
         ],
-        action=postprocessing_functions.set_ignored,
+        action=set_ignored,
         description="If a mention of staying with family/friends does not have 'stay' in the sentence, ignore it since it "
                     "might be permanent housing."
 
@@ -277,9 +328,9 @@ rules = [
         [
             PostprocessingPattern(lambda ent: ent.label_ == "EVIDENCE_OF_HOUSING"),
             PostprocessingPattern(postprocessing_functions.span_contains, condition_args=("visit",)),
-            PostprocessingPattern(postprocessing_functions.sentence_contains_ent_label, condition_args=("TEMPORARY_HOUSING",)),
+            PostprocessingPattern(sentence_contains_ent_label, condition_args=("TEMPORARY_HOUSING",)),
         ],
-        action=postprocessing_functions.set_ignored, action_args=(True,),
+        action=set_ignored, action_args=(True,),
         # action=postprocessing_functions.remove_ent,
         description="Disambiguate 'home visit' as referring to temporary housing."
     ),
@@ -301,11 +352,11 @@ rules = [
             PostprocessingPattern(lambda ent: ent.lower_ == "permanent housing"),
 
             PostprocessingPattern(postprocessing_functions.is_modified_by_category, condition_args=("RESIDES_IN",), success_value=False),
-            PostprocessingPattern(postprocessing_functions.is_preceded_by, condition_args=("maintain", 5), success_value=False),
+            PostprocessingPattern(is_preceded_by, condition_args=("maintain", 5), success_value=False),
 
             PostprocessingPattern(lambda ent:ent._.is_hypothetical is False),
         ],
-        action=postprocessing_functions.set_ignored, action_args=(True,),
+        action=set_ignored, action_args=(True,),
         description="'Permanent housing' is too vague of a term, so require it be modified by 'resides in' or preceded by 'maintain'"
     ),
 
@@ -323,17 +374,17 @@ rules = [
                                   success_value=False),
             PostprocessingPattern(postprocessing_functions.is_modified_by_category, condition_args=("ACCEPTED",),
                                   success_value=False),
-            PostprocessingPattern(postprocessing_functions.is_preceded_by, condition_args=("maintain", 5),
+            PostprocessingPattern(is_preceded_by, condition_args=("maintain", 5),
                                   success_value=False),
-            PostprocessingPattern(postprocessing_functions.is_preceded_by, condition_args=(r"has ?(an|a)?", 3),
+            PostprocessingPattern(is_preceded_by, condition_args=(r"has ?(an|a)?", 3),
                                   success_value=False),
             PostprocessingPattern(lambda ent:ent._.window(5)._.contains(r"(his|her)( own)?"),
                                   success_value=False),
             # PostprocessingPattern(lambda ent:ent._.window(5, left=True, right=False)._.contains(r"transition")),
             PostprocessingPattern(postprocessing_functions.is_modified_by_category, condition_args=("POSITIVE_HOUSING",), success_value=False),
-            # PostprocessingPattern(postprocessing_functions.is_preceded_by, condition_args=(["got"],3), success_value=False),
+            # PostprocessingPattern(is_preceded_by, condition_args=(["got"],3), success_value=False),
         ],
-        action=postprocessing_functions.set_ignored, action_args=(True,),
+        action=set_ignored, action_args=(True,),
         description="Require a modifier for 'house' or 'apartment' to be considered housing"
     ),
 

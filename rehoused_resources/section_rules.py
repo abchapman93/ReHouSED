@@ -26,5 +26,13 @@ section_rules = [
                 ]),
     SectionRule("Where are you currently living?", "KNOWN_QUESTIONNAIRE"),
     SectionRule("Patient Needs:", "patient_needs"),
+    SectionRule("Diagnosis:", "diagnosis"),
     SectionRule("Goals:", "patient_goals"),
+    SectionRule("Where are you currently living?", "KNOWN_QUESTIONNAIRE"),
+    SectionRule("Patient Needs:", "patient_needs"),
+    SectionRule("Goals:", "patient_goals", pattern=r"Goals?:"),
+    SectionRule("Strengths:", "patient_strengths"),
+    SectionRule("Living Arrangements:", "housing_status"),
+    SectionRule("Current Housing:", "housing_status"),
+    SectionRule("Housing situation", "housing_status", pattern=[{"LOWER": "current", "OP": "?"}, {"LOWER": "living"}, {"LOWER": "situation"}, {"LOWER": ":"}]),
 ]
