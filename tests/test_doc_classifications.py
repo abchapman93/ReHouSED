@@ -1,6 +1,4 @@
-from ..utils import build_nlp
-
-from .helpers import find_ents
+from rehoused_nlp.utils import build_nlp
 
 import warnings
 warnings.filterwarnings("ignore")

@@ -1,4 +1,4 @@
-from ..utils import RESOURCES_DIR
+from rehoused_nlp.utils import RESOURCES_DIR
 
 class TestUtils:
 

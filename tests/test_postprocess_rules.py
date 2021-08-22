@@ -1,7 +1,7 @@
-from ..utils import build_nlp
+from rehoused_nlp.utils import build_nlp
 from spacy.tokens import Span
 
-from .helpers import find_ents, _test_label_text, _test_label_texts
+from .helpers import find_ents, _test_label_text
 
 import warnings
 warnings.filterwarnings("ignore")

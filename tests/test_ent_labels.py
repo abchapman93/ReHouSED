@@ -1,6 +1,6 @@
-from ..utils import build_nlp
+from rehoused_nlp.utils import build_nlp
 
-from .helpers import find_ents, _test_label_text, _test_label_texts
+from .helpers import _test_label_texts
 
 import warnings
 warnings.filterwarnings("ignore")
