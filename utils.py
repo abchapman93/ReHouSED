@@ -5,7 +5,7 @@ import os
 from pathlib import Path
 
 RESOURCES_DIR = os.path.join(
-    Path(__file__).resolve().parents[0], "rehoused_resources"
+    Path(__file__).resolve().parents[0], "resources"
 )
 
 CONTEXT_ATTRS = {
@@ -67,7 +67,7 @@ def build_nlp(model="en_core_web_sm", disable=None,
         nlp = model
 
     # Add a preprocessor
-    from .rehoused_resources.preprocess_rules import preprocess_rules
+    from .resources.preprocess_rules import preprocess_rules
     from medspacy.preprocess import Preprocessor
     from .tokenizer import ssvf_tokenizer
     preprocessor = Preprocessor(ssvf_tokenizer(nlp))
@@ -77,16 +77,10 @@ def build_nlp(model="en_core_web_sm", disable=None,
     # Concept tagger
 
     from medspacy.target_matcher import ConceptTagger, TargetRule
-    from .rehoused_resources import concept_tag_rules
+    from .resources import concept_tag_rules
     concept_tagger = ConceptTagger(nlp)
     concept_tagger.add(concept_tag_rules.rules)
     concept_tag_rules = []
-    import os
-    with open(os.path.join(RESOURCES_DIR, "concept_tag_phrases.txt")) as f:
-        for line in f.read().splitlines():
-            phrase, label = line.split("\t")
-            # print(phrase, label)
-            concept_tag_rules.append(TargetRule(phrase, label))
     concept_tagger.add(concept_tag_rules)
     nlp.add_pipe(concept_tagger)
 
@@ -95,7 +89,7 @@ def build_nlp(model="en_core_web_sm", disable=None,
 
     target_matcher = TargetMatcher(nlp)
     if add_target_rules:
-        from .rehoused_resources.target_rules import target_rules
+        from .resources.target_rules import target_rules
         target_matcher.add(target_rules.rules)
     nlp.add_pipe(target_matcher)
 
@@ -104,7 +98,7 @@ def build_nlp(model="en_core_web_sm", disable=None,
     context = ConTextComponent(nlp, rules=rules, add_attrs=CONTEXT_ATTRS, remove_overlapping_modifiers=True,
                                use_context_window=use_context_window, max_scope=max_scope)
     if add_context_rules:
-        from .rehoused_resources.context_rules import context_rules
+        from .resources.context_rules import context_rules
         context.add(context_rules)
     nlp.add_pipe(context)
 
@@ -126,14 +120,14 @@ def build_nlp(model="en_core_web_sm", disable=None,
     }
     sectionizer = Sectionizer(nlp, rules=rules, add_attrs=section_attrs, max_scope=300)
 
-    from .rehoused_resources.section_rules import section_rules
+    from .resources.section_rules import section_rules
     sectionizer.add(section_rules)
 
     nlp.add_pipe(sectionizer)
 
     # Add a PostProcessor
     from medspacy.postprocess import Postprocessor
-    from .rehoused_resources import postprocess_rules
+    from .resources import postprocess_rules
     postprocessor = Postprocessor()
     postprocessor.add(postprocess_rules.rules)
 
@@ -145,42 +139,16 @@ def build_nlp(model="en_core_web_sm", disable=None,
 
     return nlp
 
-def calculate_rehoused(df,
-                       window_size=30,
-                       patient_col="pt_id",
-                       time_col="time_to_index",
-                       doc_class_col="document_classification"):
-    """Calculate the NLP-derived ReHouSED score for a cohort of patients.
-    Args:
-        df (pandas.DataFrame): A DataFrame with at least the 3 columns corresponding to
-            `patient_col`, `time_col`, and `doc_class_col`
-        window_size (int): The size of fixed time windows over which to aggregate document classifications.
-            Default 30
-        patient_col (str): Column for patient identifiers over which to group by.
-            Default 'pt_id'
-        time_col (str): Column containing the number of days to the index date for each document.
-            Default 'time_to_index'
-        doc_class_col (str): Column containing NLP-derived document classifications.
-            Default 'document_classification'
-    Returns: DataFrame where each row corresponds to a single patient time interval
-    """
-    df = df[[patient_col, time_col, doc_class_col]]
-    # Filter out unknown documents
-    df = df[df[doc_class_col] != "UNKNOWN"]
+def visualize_doc_classification(doc, doc_id=None, jupyter=True, colors=None):
+    from medspacy.visualization import visualize_ent
+    html = ""
+    if doc_id is not None:
+        html += f"<h3>Document ID: {doc_id}</h3>"
+    html += f"<h3>Document Classification: {doc._.document_classification}</h3>"
+    html += visualize_ent(doc, jupyter=False, colors=colors)
 
-    # First, group each document into a discrete time interval
-    df["time_window"] = df[time_col] // window_size
-
-    # Next, pivot to patient and time window
-    rehoused = df.pivot_table(index=[patient_col, "time_window"], columns=[doc_class_col], aggfunc=len, fill_value=0)
-    # Selected the single level
-    rehoused = rehoused[time_col]
-
-    rehoused["total_documents"] = rehoused["STABLY_HOUSED"] + rehoused["UNSTABLY_HOUSED"]
-    rehoused["rehoused"] = rehoused["STABLY_HOUSED"] / rehoused["total_documents"]
-
-    # Now flatten
-    rehoused = rehoused.sort_values([patient_col, "time_window"]).reset_index()
-    rehoused.columns = rehoused.columns.rename(None)
-
-    return rehoused
+    if jupyter is True:
+        from IPython.display import display, HTML
+        display(HTML(html))
+    else:
+        return html

@@ -1,0 +1,15 @@
+pt_id	document_id	time_to_index	text
+1	1	0	Vetern was evicted from her apartment last night. 
+1	2	4	Last night she slept on the streets.
+1	3	12	Veteran came in to the clinic asking for help with her housing. She is currently homeless.
+1	4	25	She would like to find an apartment.
+1	5	30	Veteran is looking for an apartment.
+1	6	35	Met with Veteran today at the shelter to discuss her housing search.
+1	7	45	She is optimistic about being accepted to this apartment building.
+1	8	55	Past medical history: Homelessness
+1	9	60	Veteran was accepted to an apartment today and is waiting for inspection.
+1	10	70	Apartment failed inspection today, but they will retry.
+1	11	80	Patient and I discussed her housing situation.
+1	12	85	Housing status: The apartment passed inspection. Patient signed a lease and moved into the apartment.
+1	13	90	Veteran is enjoying being in her current apartment.
+1	14	95	Housing status: Stably Housed

@@ -378,7 +378,7 @@ rules = [
                                   success_value=False),
             PostprocessingPattern(is_preceded_by, condition_args=(r"has ?(an|a)?", 3),
                                   success_value=False),
-            PostprocessingPattern(lambda ent:ent._.window(5)._.contains(r"(his|her)( own)?"),
+            PostprocessingPattern(lambda ent:ent._.window(5)._.contains(r"(his|her)( own)?", regex=True),
                                   success_value=False),
             # PostprocessingPattern(lambda ent:ent._.window(5, left=True, right=False)._.contains(r"transition")),
             PostprocessingPattern(postprocessing_functions.is_modified_by_category, condition_args=("POSITIVE_HOUSING",), success_value=False),

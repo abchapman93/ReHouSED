@@ -28,7 +28,6 @@ section_rules = [
     SectionRule("Patient Needs:", "patient_needs"),
     SectionRule("Diagnosis:", "diagnosis"),
     SectionRule("Goals:", "patient_goals"),
-    SectionRule("Where are you currently living?", "KNOWN_QUESTIONNAIRE"),
     SectionRule("Patient Needs:", "patient_needs"),
     SectionRule("Goals:", "patient_goals", pattern=r"Goals?:"),
     SectionRule("Strengths:", "patient_strengths"),
