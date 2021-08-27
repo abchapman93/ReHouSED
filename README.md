@@ -3,7 +3,7 @@
 This package is a [medspaCy](https://github.com/medspacy/medspacy) implementation of an NLP system for identifying patient housing stability in clinical texts.
 This system was originally developed in the Department of Veterans Affairs to study housing outcomes of Veterans participating
 in the Supportive Service for Veteran Families (SSVF) program. The development and validation of this system is described in
-***ReHouSED: A Novel Measurement of Veteran Housing Stability Using Natural Language Processing*** by Chapman et al. (accepted and in press).
+***ReHouSED: A Novel Measurement of Veteran Housing Stability Using Natural Language Processing*** by Chapman et al. (accepted and in press in Journal of Biomedical Informatics).
 
 This system attempts to classify housing stability at two levels:
 1. **Document-level**: Each document processed by the NLP is classified as either **"STABLY_HOUSED"**, **"UNSTABLY_HOUSED"**, or **"UNKNOWN"**
