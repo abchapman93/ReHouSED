@@ -28,10 +28,6 @@ setup(
     author_email="alec.chapman@hsc.utah.edu",
     packages=find_packages(),
     install_requires=[
-        # NOTE: spacy imports numpy to bootstrap its own setup.py in 2.3.2
-        "spacy>=2.3.0,<=2.3.2",
-        "PyRuSH>=1.0.3.5",
-        "jsonschema",
         "medspacy>=0.1.0.2",
     ],
     long_description=long_description,

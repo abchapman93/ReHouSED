@@ -16,7 +16,21 @@ Detailed examples and explanations of the logic are provided in `notebooks/`
 This system is an approximation of the system described in the manuscript and has been modified to exclude logic specific to VA 
 documentation. It is far from perfect and will certainly make mistakes!
 
+## Installation
+You can install `rehoused_nlp` using `pip`:
+```bash
+pip install rehoused-nlp
+```
+
+Or the source code found in this repository:
+```python
+python setup.py install
+```
+
+`rehoused_nlp` requires Python 3.7 or 3.8, medspaCy, and spaCy 2.2.X. spaCy 3 is not currently supported.
+
 ## Quick start
+
 ### Document-level example
 ```python
 from rehoused_nlp import build_nlp, visualize_doc_classification
