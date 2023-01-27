@@ -32,7 +32,7 @@ class TestConcepts:
             if (_test_label_text(nlp2, text, "EVIDENCE_OF_HOUSING", None,
                              attrs={"is_ignored": True}) != []):
                 failed.append(text)
-            doc = nlp(text, disable=["postprocessor", "document_classifier"])
+            doc = nlp(text, disable=["medspacy_postprocessor", "document_classifier"])
             try:
                 ent = find_ents(doc, "EVIDENCE_OF_HOUSING", 1)[0]
             except IndexError:
@@ -63,7 +63,7 @@ class TestConcepts:
                              attrs={"is_ignored": True}) != []):
                 failed.append(text); continue
 
-            doc = nlp(text, disable=["postprocessor", "document_classifier"])
+            doc = nlp(text, disable=["medspacy_postprocessor", "document_classifier"])
             try:
                 ent = find_ents(doc, "EVIDENCE_OF_HOUSING", 1)[0]
             except IndexError:
@@ -93,8 +93,8 @@ class TestConcepts:
         failed = []
 
         for text in texts:
-            doc = nlp(text, disable=["postprocessor", "document_classifier"])
-
+            doc = nlp(text, disable=["medspacy_postprocessor", "document_classifier"])
+            from medspacy.target_matcher import TargetRule, TargetMatcher
             try:
                 ent = find_ents(doc, "EVIDENCE_OF_HOUSING", 1)[0]
                 assert ent._.is_ignored is True
@@ -123,7 +123,7 @@ class TestConcepts:
         failed = []
 
         for text in texts:
-            doc = nlp(text, disable=["postprocessor", "document_classifier"])
+            doc = nlp(text, disable=["medspacy_postprocessor", "document_classifier"])
             try:
                 ent = find_ents(doc, "EVIDENCE_OF_HOUSING", 1)[0]
             except IndexError:
@@ -166,7 +166,7 @@ class TestConcepts:
         descr = "If housing is being discussed in the same sentence as 'housing options', the housing should be hypothetical."
         rule = descr_rule_map[descr]
         text = "among his housing options are an apartment"
-        doc = nlp(text, disable=["postprocessor"])
+        doc = nlp(text, disable=["medspacy_postprocessor"])
         assert doc._.document_classification != "UNSTABLY_HOUSED"
         ent = find_ents(doc, "EVIDENCE_OF_HOUSING", 2)[1]
         assert ent.text.lower() == "apartment"
@@ -179,9 +179,9 @@ class TestConcepts:
     def test_rental_assistance(self):
         descr = "Consider 'rental assistance' to be 'evidence of housing' only if it is being received"
         rule = descr_rule_map[descr]
-        doc = nlp("he receives rental assistance", disable=["postprocessor"])
+        doc = nlp("he receives rental assistance", disable=["medspacy_postprocessor"])
         assert doc._.document_classification == "STABLY_HOUSED"
-        doc = nlp("rental assistance", disable=["postprocessor", "document_classifier"])
+        doc = nlp("rental assistance", disable=["medspacy_postprocessor", "document_classifier"])
         try:
             ent = doc.ents[0]
         except IndexError:
@@ -193,14 +193,14 @@ class TestConcepts:
     def test_housing_needs(self):
         descr = "If evidence of housing occurs in the goals section, set to hypothetical"
         rule = descr_rule_map[descr]
-        doc = nlp("Patient Needs: including housing", disable=["postprocessor"])
+        doc = nlp("Patient Needs: including housing", disable=["medspacy_context", "medspacy_postprocessor"])
         ent = find_ents(doc, "EVIDENCE_OF_HOUSING")[0]
         assert ent._.is_hypothetical is False
         assert ent._.section_category == "patient_needs"
         assert rule(ent, 0)
         assert ent._.is_hypothetical
 
-        doc = nlp("Patient Needs: maintain housing", disable=["postprocessor"])
+        doc = nlp("Patient Needs: maintain housing", disable=["medspacy_context","medspacy_postprocessor"])
         ent = find_ents(doc, "EVIDENCE_OF_HOUSING")[0]
         assert ent._.is_hypothetical is False
         assert ent._.section_category == "patient_needs"
@@ -210,7 +210,7 @@ class TestConcepts:
     def test_housing_goals_maintain(self):
         descr = "If evidence of housing occurs in the goals section, change to not to hypothetical'"
         rule = descr_rule_map[descr]
-        doc = nlp("Patient Goals: maintain housing", disable=["postprocessor"])
+        doc = nlp("Patient Goals: maintain housing", disable=["medspacy_postprocessor"])
         ent = find_ents(doc, "EVIDENCE_OF_HOUSING")[0]
         assert ent._.is_hypothetical is True
         assert ent._.section_category == "patient_goals"
@@ -221,7 +221,7 @@ class TestConcepts:
         description = "If a historical entity is modified by 'CURRENT', set 'is_historical' to False"
         rule = descr_rule_map[description]
         text = "Problem: currently homeless"
-        doc = nlp(text, disable=["postprocessor"])
+        doc = nlp(text, disable=["medspacy_postprocessor"])
         ent = doc.ents[0]
         ent._.is_historical = True
         assert ent.text == "homeless"
@@ -234,7 +234,7 @@ class TestConcepts:
         rule = descr_rule_map[desc]
 
         text = "patient is eligible to be screened for shelter"
-        doc = nlp(text, disable=["postprocessor", "document_classifier"])
+        doc = nlp(text, disable=["medspacy_postprocessor", "document_classifier"])
         ent = doc.ents[0]
         assert ent.text == "shelter"
         assert ent.label_ == "TEMPORARY_HOUSING"
@@ -248,14 +248,14 @@ class TestConcepts:
         rule = descr_rule_map[desc]
         terms = ["rent", "security deposit"]
         for term in terms:
-            doc = nlp(term, disable=["postprocessor", "document_classifier"])
+            doc = nlp(term, disable=["medspacy_postprocessor", "document_classifier"])
             assert len(doc.ents) == 1
             ent = doc.ents[0]
             assert ent._.is_ignored is False
             assert rule(ent, 0)
             assert ent._.is_ignored is True
 
-            doc = nlp(f"paid her {term}", disable=["postprocessor", "document_classifier"])
+            doc = nlp(f"paid her {term}", disable=["medspacy_postprocessor", "document_classifier"])
             ent = doc.ents[0]
             assert ent._.is_ignored is False
             assert not rule(ent, 0)
@@ -267,7 +267,7 @@ class TestConcepts:
         rule = descr_rule_map[desc]
         terms = ["car", "vehicle", "park", "woods", "the streets"]
         for term in terms:
-            doc = nlp(term, disable=["postprocessor", "document_classifier"])
+            doc = nlp(term, disable=["medspacy_postprocessor", "document_classifier"])
             assert len(doc.ents) == 1
             ent = doc.ents[0]
             assert ent.label_ == "EVIDENCE_OF_HOMELESSNESS"
@@ -276,7 +276,7 @@ class TestConcepts:
             assert len(doc.ents) == 0
 
             for modifier in ["lives in", "Housing Status:"]:
-                doc = nlp(f"{modifier} {term}", disable=["postprocessor", "document_classifier"])
+                doc = nlp(f"{modifier} {term}", disable=["medspacy_postprocessor", "document_classifier"])
                 assert len(doc.ents)
                 ent = doc.ents[-1]
                 assert term in ent.text
@@ -288,7 +288,7 @@ class TestConcepts:
         desc = "If a sentence contains 'open house', consider housing to be 'hypothetical'"
         text = "stable housing open house"
         rule = descr_rule_map[desc]
-        doc = nlp(text, disable=["postprocessor", "document_classifier"])
+        doc = nlp(text, disable=["medspacy_postprocessor", "document_classifier"])
         ent = doc.ents[0]
         assert ent.label_ == "EVIDENCE_OF_HOUSING"
         assert ent._.is_hypothetical is False
@@ -299,14 +299,14 @@ class TestConcepts:
         desc = "Avoid phrases like 'his house' which are referring to a friend or family member."
         rule = descr_rule_map[desc]
         text = "his uncle let him stay at his house"
-        doc = nlp(text, disable=["postprocessor", "document_classifier"])
+        doc = nlp(text, disable=["medspacy_postprocessor", "document_classifier"])
         ent = find_ents(doc, "EVIDENCE_OF_HOUSING")[0]
         assert ent._.is_ignored is False
         assert rule(ent, 0)
         assert ent._.is_ignored is True
 
         text = "his house"
-        doc = nlp(text, disable=["postprocessor", "document_classifier"])
+        doc = nlp(text, disable=["medspacy_postprocessor", "document_classifier"])
         ent = find_ents(doc, "EVIDENCE_OF_HOUSING")[0]
         assert ent._.is_ignored is False
         assert not rule(ent, 0)
@@ -316,14 +316,14 @@ class TestConcepts:
                     "might be permanent housing.")
         rule = descr_rule_map[desc]
         text = "she is at her sister's house"
-        doc = nlp(text, disable=["postprocessor", "document_classifier"])
+        doc = nlp(text, disable=["medspacy_postprocessor", "document_classifier"])
         ent = find_ents(doc, "DOUBLING_UP")[0]
         assert ent._.is_ignored is False
         assert rule(ent, 0)
         assert ent._.is_ignored is True
 
         text = "she is staying at her sister's house"
-        doc = nlp(text, disable=["postprocessor", "document_classifier"])
+        doc = nlp(text, disable=["medspacy_postprocessor", "document_classifier"])
         ent = find_ents(doc, "DOUBLING_UP")[0]
         assert ent._.is_ignored is False
         assert not rule(ent, 0)
@@ -332,7 +332,7 @@ class TestConcepts:
         desc = "Disambiguate 'home visit' as referring to temporary housing."
         rule = descr_rule_map[desc]
         text = "I met her at the shelter to do a home visit."
-        doc = nlp(text, disable=["postprocessor", "document_classifier"])
+        doc = nlp(text, disable=["medspacy_postprocessor", "document_classifier"])
         ent = find_ents(doc, "EVIDENCE_OF_HOUSING")[0]
         assert ent.text == "home visit"
         ent2 = find_ents(doc, "TEMPORARY_HOUSING")[0]
@@ -344,7 +344,7 @@ class TestConcepts:
         assert ent._.is_ignored is True
 
         text = "I met her to do a home visit."
-        doc = nlp(text, disable=["postprocessor", "document_classifier"])
+        doc = nlp(text, disable=["medspacy_postprocessor", "document_classifier"])
         ent = find_ents(doc, "EVIDENCE_OF_HOUSING")[0]
         assert ent._.is_ignored is False
         assert not rule(ent, 0)
@@ -354,14 +354,14 @@ class TestConcepts:
                 "change is_hypothetical to False.")
         rule = descr_rule_map[desc]
         text = "He applied to an apartment and was accepted"
-        doc = nlp(text, disable=["postprocessor", "document_classifier"])
+        doc = nlp(text, disable=["medspacy_postprocessor", "document_classifier"])
         ent = find_ents(doc, "EVIDENCE_OF_HOUSING")[0]
         assert ent._.is_hypothetical is True
         assert rule(ent, 0)
         assert ent._.is_hypothetical is False
 
         text = "He applied to an apartment"
-        doc = nlp(text, disable=["postprocessor", "document_classifier"])
+        doc = nlp(text, disable=["medspacy_postprocessor", "document_classifier"])
         ent = find_ents(doc, "EVIDENCE_OF_HOUSING")[0]
         assert ent._.is_hypothetical is True
         assert not rule(ent, 0)
@@ -372,14 +372,14 @@ class TestConcepts:
         rule = descr_rule_map[desc]
         texts = ["lives in permanent housing", "maintain permanent housing", "apply for permanent housing", ]
         for text in texts:
-            doc = nlp(text, disable=["postprocessor", "document_classifier"])
+            doc = nlp(text, disable=["medspacy_postprocessor", "document_classifier"])
             ent = find_ents(doc, "EVIDENCE_OF_HOUSING")[0]
             assert ent._.is_ignored is False
             assert not rule(ent, 0)
 
         texts = ["permanent housing", ]
         for text in texts:
-            doc = nlp(text, disable=["postprocessor", "document_classifier"])
+            doc = nlp(text, disable=["medspacy_postprocessor", "document_classifier"])
             ent = find_ents(doc, "EVIDENCE_OF_HOUSING")[0]
             assert ent._.is_ignored is False
             assert rule(ent, 0)
@@ -416,7 +416,7 @@ class TestConcepts:
         failed = []
         for term in ent_terms:
             # First check that without a modifier it is ignored
-            doc = nlp(term, disable=["postprocessor", "document_classifier"])
+            doc = nlp(term, disable=["medspacy_postprocessor", "document_classifier"])
 
             try:
                 ent = find_ents(doc, "EVIDENCE_OF_HOUSING")[0]
@@ -431,7 +431,7 @@ class TestConcepts:
             # Now test with each of the modifiers
             for modifier in modifiers:
                 text = f"{modifier} {term} {modifier}" # crude - in case modifiers are forward or backward looking
-                doc = nlp(text, disable=["postprocessor", "document_classifier"])
+                doc = nlp(text, disable=["medspacy_postprocessor", "document_classifier"])
                 try:
                     ent = find_ents(doc, "EVIDENCE_OF_HOUSING")[0]
                     assert ent._.is_ignored is False
@@ -447,7 +447,7 @@ class TestConcepts:
                     "since it's probably not an accurate diagnosis.")
         rule = descr_rule_map[desc]
         text = "Diagnosis: asdf asdf Homelessness"
-        doc = nlp(text, disable=["postprocessor", "document_classifier"])
+        doc = nlp(text, disable=["medspacy_postprocessor", "document_classifier"])
         ent = find_ents(doc, "EVIDENCE_OF_HOMELESSNESS")[0]
         assert ent._.section_category.upper() == "DIAGNOSIS"
         assert ent._.is_historical is False
@@ -455,7 +455,7 @@ class TestConcepts:
         assert ent._.is_historical is True
 
         text = "homelessness"
-        doc = nlp(text, disable=["postprocessor", "document_classifier"])
+        doc = nlp(text, disable=["medspacy_postprocessor", "document_classifier"])
         ent = find_ents(doc, "EVIDENCE_OF_HOMELESSNESS")[0]
         assert ent._.is_historical is False
         assert not rule(ent, 0)

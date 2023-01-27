@@ -93,7 +93,7 @@ def build_nlp(model="en_core_web_sm", disable=None,
 
     # Add ConText
     context = nlp.add_pipe("medspacy_context",
-                           config=dict(rules=rules, span_attrs=CONTEXT_ATTRS,
+                           config=dict(rules=rules, add_attrs=CONTEXT_ATTRS,
                                     max_scope=max_scope))
 
     if add_context_rules:
@@ -116,7 +116,7 @@ def build_nlp(model="en_core_web_sm", disable=None,
         "patient_education": {"is_ignored": True},
     }
     sectionizer = nlp.add_pipe("medspacy_sectionizer",
-                               config=dict(rules=rules, span_attrs=section_attrs, max_section_length=300))
+                               config=dict(rules=rules, add_attrs=section_attrs, max_scope=300))
 
 
     from rehoused_nlp.resources.section_rules import section_rules
