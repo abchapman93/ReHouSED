@@ -46,7 +46,7 @@ context_rules = [
                 max_scope=4),
     ConTextRule("intent to pay", "HYPOTHETICAL"),
     ConTextRule("has chosen", "HYPOTHETICAL", on_modifies=callbacks.has_chosen),
-    ConTextRule("waiting for", "HYPOTHETICAL", "FORWARD",
+    ConTextRule("waiting for", "HYPOTHETICAL", direction="FORWARD",
                 pattern=[
                     {"LOWER": {"REGEX": "wait(ing)?$"}},
                     {"LOWER": {"IN": ["for", "on"]}}
@@ -89,7 +89,7 @@ context_rules = [
     ConTextRule("on and off", "HISTORICAL", direction="bidirectional"),
     ConTextRule("history of", "HISTORICAL", direction="forward", allowed_types={"EVIDENCE_OF_HOMELESSNESS"},
                 pattern=[{"LOWER": {"IN": ["history", "hx"]}}, {"LOWER": "of"}]),
-    ConTextRule("past medical history of", "HISTORICAL", "FORWARD", allowed_types={"EVIDENCE_OF_HOMELESSNESS"},
+    ConTextRule("past medical history of", "HISTORICAL", direction="FORWARD", allowed_types={"EVIDENCE_OF_HOMELESSNESS"},
                 pattern=[
                     {"LOWER": "past"},
                     {"LOWER": "medical"},
@@ -97,7 +97,7 @@ context_rules = [
                     {"LOWER": "of", 'OP': "?"}
 
                 ]),
-    ConTextRule("pmhx of", "HISTORICAL", "FORWARD", allowed_types={"EVIDENCE_OF_HOMELESSNESS"},
+    ConTextRule("pmhx of", "HISTORICAL", direction="FORWARD", allowed_types={"EVIDENCE_OF_HOMELESSNESS"},
                 pattern=[
                     {"LOWER": {"IN": ["pmh", "pmhx"]}},
                     {"LOWER": "of", 'OP': "?"}
@@ -304,7 +304,7 @@ context_rules = [
     ConTextRule("planing", "HYPOTHETICAL", direction="forward",
                 pattern=[{"LOWER": {"REGEX": "plan"}}, {"LOWER": "to", "OP": "?"}],
                 allowed_types={"EVIDENCE_OF_HOUSING"}),
-    ConTextRule("planning", "HYPOTHETICAL", "FORWARD",
+    ConTextRule("planning", "HYPOTHETICAL", direction="FORWARD",
                 pattern=[{"LOWER": "has"}, {"LEMMA": "plan"}],
                 allowed_types={"EVIDENCE_OF_HOUSING"}),
     ConTextRule("(housing) plan", "HYPOTHETICAL", direction="BACKWARD",
@@ -327,9 +327,9 @@ context_rules = [
                 ),
     ConTextRule("move forward", "HYPOTHETICAL", direction="FORWARD", allowed_types={"EVIDENCE_OF_HOUSING", "TEMPORARY_HOUSING"},
                 pattern=[{"LEMMA": "move"}, {"LOWER": "forward"}],),
-    ConTextRule("screened for admission", "HYPOTHETICAL", "FORWARD", allowed_types={"EVIDENCE_OF_HOUSING", "TEMPORARY_HOUSING"},
+    ConTextRule("screened for admission", "HYPOTHETICAL", direction="FORWARD", allowed_types={"EVIDENCE_OF_HOUSING", "TEMPORARY_HOUSING"},
                 pattern=[{"LOWER": "screened"}, {"LOWER": "for"}, {"POS": "ADJ", "OP": "?"}, {"LOWER": "admission"}]),
-    ConTextRule("screening for", "HYPOTHETICAL", "FORWARD",
+    ConTextRule("screening for", "HYPOTHETICAL", direction="FORWARD",
                 allowed_types={"EVIDENCE_OF_HOUSING", "EVIDENCE_OF_HOMELESSNESS", "TEMPORARY_HOUSING"},
                 pattern=[
                     {"LOWER": {"IN": ["screen", "screened", "screening"]}},
@@ -337,8 +337,8 @@ context_rules = [
                     {"LOWER": "for"}
                 ]
                 ),
-    ConTextRule("contact with", "HYPOTHETICAL", "FORWARD", on_modifies=callbacks.contact_with),
-    ConTextRule("should be approved", "HYPOTHETICAL", "FORWARD"),
+    ConTextRule("contact with", "HYPOTHETICAL", direction="FORWARD", on_modifies=callbacks.contact_with),
+    ConTextRule("should be approved", "HYPOTHETICAL", direction="FORWARD"),
 
     # TODO: Keep an eye on this, may be too aggressive
     ConTextRule("?", "NOT_RELEVANT", direction="BACKWARD", max_scope=None, on_match=callbacks.disambiguate_question_mark),
@@ -418,7 +418,7 @@ context_rules = [
                     {"LOWER": "to"},
                     {"LOWER": {"IN": ["reside", "live"]}},
                 ]),
-    ConTextRule("moving into", "RESIDES_IN", "FORWARD",
+    ConTextRule("moving into", "RESIDES_IN", direction="FORWARD",
                 pattern=[
                     {"LOWER": {"IN": ["moved", "moving", "transition", "transitioning"]}},
                     {"LOWER": {"IN": ["to", "into"]}}
@@ -444,7 +444,7 @@ context_rules = [
     ConTextRule("approved", "ACCEPTED", direction="FORWARD", pattern=[{"LOWER": "approved"}, {"LOWER": "for", "OP": "?"},]),
     ConTextRule("could be approved", "HYPOTHETICAL", direction="FORWARD"),
 
-    ConTextRule("enrolled", "ENROLLMENT", "FORWARD",
+    ConTextRule("enrolled", "ENROLLMENT", direction="FORWARD",
                 pattern=[
                     {"LOWER": {"IN": ["enroll", "enrolled"]}},
                     {"LOWER": {"IN": ["in", "into", "participant"]}, "OP": "?"}

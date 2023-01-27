@@ -1,5 +1,6 @@
 from spacy.tokens import Doc
 from collections import defaultdict
+from spacy.language import Language
 
 from . import constants
 
@@ -21,11 +22,12 @@ def set_is_classifier(ents):
     for ent in ents:
         ent._.is_classifier = True
 
+@Language.factory("document_classifier")
 class SSVFDocumentClassifier:
-    name = "document_classifier"
 
-    def __init__(self, debug=False):
+    def __init__(self, nlp, name="document_classifier", debug=False):
         self.debug = debug
+        self.name = name
 
     def gather_ssvf_data(self, doc):
         doc._.ssvf_data = dict()
@@ -201,7 +203,7 @@ class SSVFDocumentClassifier:
     def is_answer(self, ent):
         import re
         for modifier in ent._.modifiers:
-            if re.search("continues to (reside|live) in", modifier.span.lower_):
+            if re.search("continues to (reside|live) in", modifier.span.text.lower()):
                 return True
         return False
 

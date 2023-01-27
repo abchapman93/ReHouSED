@@ -7,10 +7,10 @@ import warnings
 warnings.filterwarnings("ignore")
 
 nlp = build_nlp()
-postprocessor = nlp.get_pipe("postprocessor")
+postprocessor = nlp.get_pipe("medspacy_postprocessor")
 
 nlp2 = build_nlp()
-nlp2.remove_pipe("postprocessor")
+nlp2.remove_pipe("medspacy_postprocessor")
 
 descr_rule_map = {rule.description: rule for rule in postprocessor.rules}
 

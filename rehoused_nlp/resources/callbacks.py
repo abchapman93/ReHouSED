@@ -103,7 +103,7 @@ def disambiguate_housing(matcher, doc, i, matches):
     span = doc[start:end]
     # Check if words about keep housing are in the sentence
     preceding_sent = span.sent[:span.start]
-    preceding_tokens = [token.lower_ for token in preceding_sent]
+    preceding_tokens = [token.text.lower() for token in preceding_sent]
     for word in ["maintain", "keep", "sustain", "need", "find"]:
         if word in preceding_tokens:
             return
@@ -120,7 +120,7 @@ def disambiguate_question_mark(matcher, doc, i, matches):
 
     span = doc[start:end]
     next_span = get_next_non_ws_tokens(span[-1], 5)
-    next_words = {token.lower_ for token in next_span}
+    next_words = {token.text.lower() for token in next_span}
 
     yes_words = {"yes", "y"}
     no_words = {"no", "n"}
@@ -266,25 +266,25 @@ def get_next_token_w_newline(start_token, max_scope=None):
 def on_modifies_pay(target, modifier, span_between):
     """For the modifiers 'not pay' or 'late', check that valid target terms such as 'rent' or 'bill' are being modified."""
     for term in ["bill", "rent", "mortgage"]:
-        if term in target.lower_:
+        if term in target.text.lower():
             return True
     return False
 
 def on_modifies_housing_plan(target, modifier, span_between):
     """For the modifier 'not pay', check that valid target terms such as 'rent' or 'bill' are being modified."""
-    if target.lower_.endswith("housing"):
+    if target.text.lower().endswith("housing"):
         return True
     return False
 
 def has_chosen(target, modifier, span_between):
     "Only allow the phrase 'has chosen' to modify phrases like 'apartment'."
-    if re.search("apartment|apt", target.lower_):
+    if re.search("apartment|apt", target.text.lower()):
         return True
     return False
 
 def contact_with(target, modifier, span_between):
     "Disambiguate phrases like 'made contact with apartment complex'"
-    if not re.search(r"landlord|complex|manager", target.lower_):
+    if not re.search(r"landlord|complex|manager", target.text.lower()):
         return False
     return True
 
