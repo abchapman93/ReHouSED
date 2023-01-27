@@ -9,11 +9,11 @@ prefix_re = re.compile(r'[\[\]\(]')
 special_cases = {"[]": [{"ORTH": "[]"}],
                  "[X]": [{"ORTH": "[X]"}],
                  "Z59.0": [{"ORTH": "Z59.0"}],
-                 "z59.0": [{"ORTH": "Z59.0"}],
+                 "z59.0": [{"ORTH": "z59.0"}],
                  "V60.0": [{"ORTH": "V60.0"}],
-                 "v60.0": [{"ORTH": "V60.0"}],
+                 "v60.0": [{"ORTH": "v60.0"}],
                  "Z59.8": [{"ORTH": "Z59.8"}],
-                 "z59.8": [{"ORTH": "Z59.8"}],
+                 "z59.8": [{"ORTH": "z59.8"}],
                  "housing/homeless": [{"ORTH": "housing/homeless"}],
                  }
 

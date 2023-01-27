@@ -28,7 +28,7 @@ setup(
     author_email="alec.chapman@hsc.utah.edu",
     packages=find_packages(),
     install_requires=[
-        "medspacy>=0.1.0.2",
+        "medspacy==0.2.0.1",
     ],
     long_description=long_description,
     long_description_content_type="text/markdown",

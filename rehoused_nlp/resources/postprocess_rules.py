@@ -16,7 +16,7 @@ def is_preceded_by(ent, target, window=1):
         preceding ent.
     """
     preceding_span = ent.doc[max((ent.start - window, 0)): ent.start]
-    preceding_string = " ".join([token.lower_ for token in preceding_span])
+    preceding_string = " ".join([token.text.lower() for token in preceding_span])
 
     if isinstance(target, str):
         return re.search(target.lower(), preceding_string) is not None
@@ -36,7 +36,7 @@ def is_followed_by(ent, target, window=1):
         following ent.
     """
     following_span = ent.doc[ent.end: ent.end+window]
-    following_string = " ".join([token.lower_ for token in following_span])
+    following_string = " ".join([token.text.lower() for token in following_span])
     if isinstance(target, str):
         return re.search(target.lower(), following_string) is not None
     for string in target:
@@ -93,7 +93,7 @@ rules = [
 
     PostprocessingRule(
         patterns=[
-            PostprocessingPattern(lambda ent: ent.lower_ == "housing"),
+            PostprocessingPattern(lambda ent: ent.text.lower() == "housing"),
             PostprocessingPattern(lambda ent: ent.label_ == "EVIDENCE_OF_HOUSING"),
             (
                 PostprocessingPattern(postprocessing_functions.is_modified_by_category, condition_args=("HYPOTHETICAL",)),
@@ -108,7 +108,7 @@ rules = [
 
     PostprocessingRule(
         patterns=[
-            PostprocessingPattern(lambda ent: ent.lower_ == "housing"),
+            PostprocessingPattern(lambda ent: ent.text.lower() == "housing"),
             PostprocessingPattern(lambda ent: ent.label_ == "EVIDENCE_OF_HOUSING"),
             (
                 PostprocessingPattern(is_preceded_by, condition_args=(r"found",2),),
@@ -122,7 +122,7 @@ rules = [
 
     PostprocessingRule(
         patterns=[
-            PostprocessingPattern(lambda ent: ent.lower_ == "home"),
+            PostprocessingPattern(lambda ent: ent.text.lower() == "home"),
             PostprocessingPattern(lambda ent: ent.label_ == "EVIDENCE_OF_HOUSING"),
             PostprocessingPattern(lambda ent: ent._.any_context_attributes is False),
             (
@@ -140,7 +140,7 @@ rules = [
 
     PostprocessingRule(
         patterns=[
-            PostprocessingPattern(lambda ent: ent.lower_ in ("stable housing", "housing")),
+            PostprocessingPattern(lambda ent: ent.text.lower() in ("stable housing", "housing")),
             PostprocessingPattern(lambda ent: ent._.is_negated is True),
             PostprocessingPattern(postprocessing_functions.is_modified_by_text,
                                   condition_args=([r"has no", "not have"], True)),
@@ -151,7 +151,7 @@ rules = [
 
     PostprocessingRule(
         patterns=[
-            PostprocessingPattern(lambda ent: ent.lower_.endswith("housing")),
+            PostprocessingPattern(lambda ent: ent.text.lower().endswith("housing")),
             PostprocessingPattern(is_followed_by, condition_args=(r"situation",)),
         ],
         action=set_ignored,
@@ -348,7 +348,7 @@ rules = [
     PostprocessingRule(
         [
             PostprocessingPattern(lambda ent: ent.label_ == "EVIDENCE_OF_HOUSING"),
-            PostprocessingPattern(lambda ent: ent.lower_ == "permanent housing"),
+            PostprocessingPattern(lambda ent: ent.text.lower() == "permanent housing"),
 
             PostprocessingPattern(postprocessing_functions.is_modified_by_category, condition_args=("RESIDES_IN",), success_value=False),
             PostprocessingPattern(is_preceded_by, condition_args=("maintain", 5), success_value=False),
@@ -363,7 +363,7 @@ rules = [
     PostprocessingRule(
         [
             PostprocessingPattern(lambda ent: ent.label_ == "EVIDENCE_OF_HOUSING"),
-            PostprocessingPattern(lambda ent: ent.lower_ in ("house", "apartment", "apartment complex", "apartment building", "apt")),
+            PostprocessingPattern(lambda ent: ent.text.lower() in ("house", "apartment", "apartment complex", "apartment building", "apt")),
             PostprocessingPattern(postprocessing_functions.is_modified_by_text,
                                   condition_args=(r"(apply|applied|visit|available|look)",),
                                   success_value=False),
@@ -390,7 +390,7 @@ rules = [
     PostprocessingRule(
         [
             PostprocessingPattern(lambda ent: ent.label_ == "EVIDENCE_OF_HOMELESSNESS"),
-            PostprocessingPattern(lambda ent: ent.lower_ == "homelessness"),
+            PostprocessingPattern(lambda ent: ent.text.lower() == "homelessness"),
             PostprocessingPattern(lambda ent: ent._.section_category is not None),
             PostprocessingPattern(lambda ent: ent._.section_category.upper() == "DIAGNOSIS"),
         ],

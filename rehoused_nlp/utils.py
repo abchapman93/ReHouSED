@@ -19,7 +19,7 @@ CONTEXT_ATTRS = {
 def set_extensions():
     from spacy.tokens import Span, Token, Doc
 
-    Token.set_extension("concept_tag", default="", force=True)
+    # Token.set_extension("concept_tag", default="", force=True)
     for (_, attr_dict) in CONTEXT_ATTRS.items():
         for (attr_name, attr_value) in attr_dict.items():
             Span.set_extension(attr_name, default=False, force=True)
@@ -50,7 +50,7 @@ Span.set_extension("is_asserted", getter=lambda x:is_asserted(x), force=True)
 def build_nlp(model="en_core_web_sm", disable=None,
               rules="default",
               add_target_rules=True, add_context_rules=True,
-              use_context_window=False, max_scope=15):
+              max_scope=15):
     """Return a model with custom components for SSVF."""
     try:
         set_extensions()
@@ -77,29 +77,28 @@ def build_nlp(model="en_core_web_sm", disable=None,
 
     from medspacy.target_matcher import ConceptTagger
     from rehoused_nlp.resources import concept_tag_rules
-    concept_tagger = ConceptTagger(nlp)
+    concept_tagger = nlp.add_pipe("medspacy_concept_tagger")
     concept_tagger.add(concept_tag_rules.rules)
     concept_tag_rules = []
     concept_tagger.add(concept_tag_rules)
-    nlp.add_pipe(concept_tagger)
+
 
     # Add a target matcher
     from medspacy.target_matcher import TargetMatcher
 
-    target_matcher = TargetMatcher(nlp)
+    target_matcher = nlp.add_pipe("medspacy_target_matcher")
     if add_target_rules:
         from rehoused_nlp.resources.target_rules import target_rules
         target_matcher.add(target_rules.rules)
-    nlp.add_pipe(target_matcher)
 
     # Add ConText
-    from medspacy.context import ConTextComponent
-    context = ConTextComponent(nlp, rules=rules, add_attrs=CONTEXT_ATTRS, remove_overlapping_modifiers=True,
-                               use_context_window=use_context_window, max_scope=max_scope)
+    context = nlp.add_pipe("medspacy_context",
+                           config=dict(rules=rules, add_attrs=CONTEXT_ATTRS,
+                                    max_scope=max_scope))
+
     if add_context_rules:
         from rehoused_nlp.resources.context_rules import context_rules
         context.add(context_rules)
-    nlp.add_pipe(context)
 
 
 
@@ -116,24 +115,24 @@ def build_nlp(model="en_core_web_sm", disable=None,
         "past_medical_history": {"is_historical": True},
         "patient_education": {"is_ignored": True},
     }
-    sectionizer = Sectionizer(nlp, rules=rules, add_attrs=section_attrs, max_scope=300)
+    sectionizer = nlp.add_pipe("medspacy_sectionizer",
+                               config=dict(rules=rules, add_attrs=section_attrs, max_scope=300))
+
 
     from rehoused_nlp.resources.section_rules import section_rules
     sectionizer.add(section_rules)
 
-    nlp.add_pipe(sectionizer)
-
     # Add a PostProcessor
     from medspacy.postprocess import Postprocessor
     from rehoused_nlp.resources import postprocess_rules
-    postprocessor = Postprocessor()
+
+
+
+    postprocessor = nlp.add_pipe("medspacy_postprocessor")
     postprocessor.add(postprocess_rules.rules)
 
-    nlp.add_pipe(postprocessor)
-
     from .ssvf_component import SSVFDocumentClassifier
-
-    nlp.add_pipe(SSVFDocumentClassifier())
+    nlp.add_pipe("document_classifier")
 
     return nlp
 
