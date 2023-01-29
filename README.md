@@ -27,7 +27,7 @@ Or the source code found in this repository:
 python setup.py install
 ```
 
-`rehoused_nlp` requires Python 3.7 or 3.8, medspaCy, and spaCy 2.2.X. spaCy 3 is not currently supported.
+`rehoused_nlp` requires Python 3.7 or 3.8, medspaCy==0.2.0.1, and spaCy spacy>=3.1.3,<3.2.0. 
 
 ## Quick start
 
