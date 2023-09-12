@@ -10,7 +10,12 @@ This system attempts to classify housing stability at two levels:
 2. **Patient-level**: A set of documents over a period of time are processed and aggregated to a patient level. This is a numeric score
 ranging from 0-1 called **"Relative Housing Stability in Electronic Documentation" (ReHouSED)**
 
-Detailed examples and explanations of the logic are provided in `notebooks/`
+Detailed examples and explanations of the logic are provided in `notebooks/`.
+
+ReHouSED has used been in a few additional papers as well:
+
+- [Using natural language processing to study homelessness longitudinally with electronic health record data subject to irregular observations](https://www.medrxiv.org/content/10.1101/2023.03.17.23287414v1) To be presented at AMIA Annual Symposium 2023 (preprint)
+- [Assessing longitudinal housing status using Electronic Health Record data: a comparison of natural language processing, structured data, and patient-reported history](https://www.frontiersin.org/articles/10.3389/frai.2023.1187501/full)
 
 ## Disclaimer
 This system is an approximation of the system described in the manuscript and has been modified to exclude logic specific to VA 
