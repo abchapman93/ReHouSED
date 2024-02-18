@@ -1,0 +1,1287 @@
+{
+    "target_rules": [
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "<HE/SHE> has an apartment",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "he",
+                            "she"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "has"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "a",
+                            "an"
+                        ]
+                    },
+                    "OP": "?"
+                },
+                {
+                    "_": {
+                        "concept_tag": "RESIDENCE"
+                    },
+                    "OP": "+"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "<HIS/HER> housing application",
+            "attributes": {
+                "is_hypothetical": true
+            },
+            "pattern": [
+                {
+                    "_": {
+                        "concept_tag": "PATIENT"
+                    },
+                    "OP": "+",
+                    "IS_TITLE": false
+                },
+                {
+                    "_": {
+                        "concept_tag": "RESIDENCE"
+                    },
+                    "OP": "+"
+                },
+                {
+                    "LOWER": "application"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "<HIS/HER> housing status",
+            "attributes": {
+                "is_ignored": true
+            },
+            "pattern": [
+                {
+                    "_": {
+                        "concept_tag": "PATIENT"
+                    },
+                    "OP": "+",
+                    "IS_TITLE": false
+                },
+                {
+                    "_": {
+                        "concept_tag": "RESIDENCE"
+                    },
+                    "OP": "+"
+                },
+                {
+                    "LOWER": "status"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "<HIS/HER> HUD-VASH housing",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "his",
+                            "her"
+                        ]
+                    }
+                },
+                {
+                    "_": {
+                        "concept_tag": "HUD-VASH"
+                    },
+                    "OP": "+"
+                },
+                {
+                    "_": {
+                        "concept_tag": "RESIDENCE"
+                    },
+                    "OP": "+"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "<HIS/HER> lease",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "his",
+                            "her"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "lease"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "<HIS/HER> residence",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "his",
+                            "her"
+                        ]
+                    }
+                },
+                {
+                    "POS": "ADJ",
+                    "OP": "*",
+                    "LOWER": {
+                        "NOT_IN": [
+                            "temporary"
+                        ]
+                    }
+                },
+                {
+                    "_": {
+                        "concept_tag": "RESIDENCE"
+                    },
+                    "OP": "+",
+                    "LOWER": {
+                        "NOT_IN": [
+                            "housing",
+                            "home"
+                        ]
+                    }
+                },
+                {
+                    "POS": "NOUN",
+                    "OP": "!"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "<RESIDENCE> rented by <PATIENT>",
+            "pattern": [
+                {
+                    "_": {
+                        "concept_tag": "RESIDENCE"
+                    },
+                    "OP": "+"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "owned",
+                            "rented",
+                            "leased"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "by"
+                },
+                {
+                    "_": {
+                        "concept_tag": "PATIENT"
+                    },
+                    "OP": "+"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "<THEIR> housing appointment",
+            "attributes": {
+                "is_hypothetical": true
+            },
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "his",
+                            "her"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "housing"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "appointment",
+                            "appt"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "<THEIR> landlord",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "his",
+                            "her"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "current",
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "landlord"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "apartment"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "apartment complex"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "apartment search",
+            "attributes": {
+                "is_hypothetical": true
+            }
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "apartment viewing",
+            "attributes": {
+                "is_hypothetical": true
+            },
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "housing",
+                            "apartment"
+                        ]
+                    }
+                },
+                {
+                    "LEMMA": "viewing"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "approved for a unit"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "current/behind on rent",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "current",
+                            "behind"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "in",
+                            "on",
+                            "with"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "rent"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "currently housed"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "Date Veteran moved into HUD-VASH housing (mm/dd/yy)",
+            "attributes": {
+                "is_ignored": true
+            }
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "discharged to stable housing",
+            "pattern": "(d/c|d/c'd|discharged?) to stable housing"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "found a new apartment",
+            "pattern": [
+                {
+                    "LOWER": "found"
+                },
+                {
+                    "LOWER": "a"
+                },
+                {
+                    "LOWER": "new"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "apartment",
+                            "apt"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "home",
+            "attributes": {
+                "is_ignored": true
+            },
+            "pattern": [
+                {
+                    "LOWER": "home"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "home visit"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "house"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "house hunting",
+            "attributes": {
+                "is_hypothetical": true
+            },
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "house",
+                            "home"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": {
+                        "REGEX": "^hunt"
+                    }
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "housing",
+            "attributes": {
+                "is_ignored": true
+            }
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "housing application",
+            "attributes": {
+                "is_hypothetical": true
+            }
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "housing appointment",
+            "attributes": {
+                "is_hypothetical": true
+            },
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "his",
+                            "her"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "housing"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "appointment",
+                            "appt"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "housing leads",
+            "attributes": {
+                "is_hypothetical": true
+            },
+            "pattern": [
+                {
+                    "LOWER": "housing"
+                },
+                {
+                    "LOWER": "lead"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "housing options",
+            "attributes": {
+                "is_hypothetical": true
+            },
+            "pattern": [
+                {
+                    "LOWER": "housing"
+                },
+                {
+                    "LEMMA": "option"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "Housing rented by Veteran, no ongoing housing subsidy"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "housing search",
+            "attributes": {
+                "is_hypothetical": true
+            },
+            "pattern": [
+                {
+                    "POS": {
+                        "IN": [
+                            "DET",
+                            "ADJ"
+                        ]
+                    },
+                    "OP": "?"
+                },
+                {
+                    "_": {
+                        "concept_tag": "RESIDENCE"
+                    },
+                    "OP": "+"
+                },
+                {
+                    "LOWER": {
+                        "REGEX": "^search"
+                    }
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "housing search",
+            "attributes": {
+                "is_hypothetical": true
+            }
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "housing subsidy"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "independent housing"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "landlord",
+            "attributes": {
+                "is_ignored": true
+            }
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "lives at <RESIDENCE>",
+            "pattern": [
+                {
+                    "LEMMA": {
+                        "IN": [
+                            "live",
+                            "reside"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "at",
+                            "in"
+                        ]
+                    }
+                },
+                {
+                    "_": {
+                        "concept_tag": "RESIDENCE"
+                    },
+                    "OP": "+",
+                    "IS_TITLE": false
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "lives independently",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "liv(es|ing)"
+                    }
+                },
+                {
+                    "LOWER": {
+                        "REGEX": "^independent"
+                    }
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "lives with <FAMILY>",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "live",
+                            "lives",
+                            "living",
+                            "reside",
+                            "resides",
+                            "residing",
+                            "domicile",
+                            "domiciles",
+                            "domiciling",
+                            "domiciled"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "with",
+                            "w",
+                            "w/"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "/",
+                    "OP": "?"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "his",
+                            "her",
+                            "their"
+                        ]
+                    },
+                    "OP": "?"
+                },
+                {
+                    "_": {
+                        "concept_tag": "FAMILY"
+                    },
+                    "OP": "+"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "living facility"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "maintain housing",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "maintain"
+                    }
+                },
+                {
+                    "LOWER": "housing"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "move into <DET> <RESIDENCE>",
+            "pattern": [
+                {
+                    "LEMMA": "move"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "in",
+                            "into"
+                        ]
+                    }
+                },
+                {
+                    "POS": "DET"
+                },
+                {
+                    "_": {
+                        "concept_tag": "RESIDENCE"
+                    },
+                    "OP": "+"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "move into their apartment",
+            "pattern": [
+                {
+                    "LEMMA": "move"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "in",
+                            "into"
+                        ]
+                    }
+                },
+                {
+                    "_": {
+                        "concept_tag": "PATIENT"
+                    },
+                    "OP": "+"
+                },
+                {
+                    "LOWER": "own",
+                    "OP": "?"
+                },
+                {
+                    "_": {
+                        "concept_tag": "RESIDENCE"
+                    },
+                    "OP": "+"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "not at risk of <homelessness>",
+            "pattern": [
+                {
+                    "LOWER": "not"
+                },
+                {
+                    "LOWER": "at"
+                },
+                {
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "risk"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "of",
+                            "for"
+                        ]
+                    }
+                },
+                {
+                    "OP": "?"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "homelessness",
+                            "eviction",
+                            "homeless"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "not worried about housing"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "option of housing",
+            "attributes": {
+                "is_hypothetical": true
+            }
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "paid security deposit"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "pass inspection",
+            "pattern": [
+                {
+                    "LEMMA": "pass"
+                },
+                {
+                    "POS": {
+                        "IN": [
+                            "DET",
+                            "PRON"
+                        ]
+                    },
+                    "OP": "?"
+                },
+                {
+                    "POS": "ADJ",
+                    "OP": "*"
+                },
+                {
+                    "LOWER": "inspection"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "per diem housing"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "permanent housing"
+        },{
+            "category": "IGNORE",
+            "literal": "permanent housing program",
+            "pattern": [
+                {"LOWER": "permanent"},
+                {"LOWER": "housing"},
+                {"OP": "?"},
+                {"LOWER": "program"}
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "plans to live",
+            "attributes": {
+                "is_hypothetical": true
+            },
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "plan"
+                    }
+                },
+                {
+                    "LOWER": "to"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "live",
+                            "reside"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "re-housed"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "received the keys",
+            "pattern": [
+                {
+                    "LEMMA": {
+                        "IN": [
+                            "receive",
+                            "give",
+                            "get"
+                        ]
+                    }
+                },
+                {
+                    "POS": "DET",
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "keys"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "recently housed"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "remains housed"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "rent"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "rental assistance",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "rental",
+                            "housing"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "assistance"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "resides alone",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "resides",
+                            "lives"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "alone"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "section 8 housing",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "^sec"
+                    }
+                },
+                {
+                    "LOWER": "8"
+                },
+                {
+                    "LOWER": "subsidized",
+                    "OP": "?"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "housing",
+                            "apartment"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "secured housing"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "security deposit"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "security deposit paid",
+            "pattern": [
+                {
+                    "LOWER": "security"
+                },
+                {
+                    "LOWER": "deposit"
+                },
+                {
+                    "LEMMA": "be",
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "paid"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "signed a lease",
+            "pattern": [
+                {
+                    "LEMMA": "sign"
+                },
+                {
+                    "POS": "DET"
+                },
+                {
+                    "LOWER": "lease"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "sold his house",
+            "attributes": {
+                "is_ignored": true
+            },
+            "pattern": [
+                {
+                    "LEMMA": "sell"
+                },
+                {
+                    "POS": "DET"
+                },
+                {
+                    "_": {
+                        "concept_tag": "RESIDENCE"
+                    }
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "Stably housed"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "Stable housing"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "successfully housed"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "their rent is $\\d",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "his",
+                            "her"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "rent"
+                },
+                {
+                    "LOWER": "is"
+                },
+                {
+                    "LOWER": "$",
+                    "OP": "?"
+                },
+                {
+                    "LIKE_NUM": true
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "veteran's <RESIDENCE>",
+            "pattern": [
+                {
+                    "_": {
+                        "concept_tag": "PATIENT"
+                    },
+                    "OP": "+",
+                    "IS_TITLE": false
+                },
+                {
+                    "_": {
+                        "concept_tag": "RESIDENCE"
+                    },
+                    "OP": "+",
+                    "LOWER": {
+                        "NOT_IN": [
+                            "housing"
+                        ]
+                    }
+                },
+                {
+                    "POS": "NOUN",
+                    "OP": "!"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "Veteran's home",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "veteran",
+                            "vets",
+                            "patient",
+                            "pt"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "'s",
+                    "OP": "?"
+                },
+                {
+                    "OP": "?",
+                    "IS_TITLE": false
+                },
+                {
+                    "LOWER": "home"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "Veteran's landlord",
+            "pattern": [
+                {
+                    "_": {
+                        "concept_tag": "PATIENT"
+                    },
+                    "OP": "+"
+                },
+                {
+                    "LOWER": "current",
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "landlord"
+                }
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "voucher",
+            "attributes": {
+                "is_ignored": true
+            }
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "will be living at",
+            "attributes": {
+                "is_hypothetical": true
+            }
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "Yes: In the past 2 months, have you been living in stable housing that you own, rent, or stay in as part of a household?"
+        },
+        {
+            "category": "HOMELESSNESS_HEALTHCARE_SERVICE",
+            "literal": "section 8 housing program",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "^sec"
+                    }
+                },
+                {
+                    "LOWER": "8"
+                },
+                {
+                    "LOWER": "subsidized",
+                    "OP": "?"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "housing",
+                            "apartment"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "program"
+                }
+            ]
+        },
+        {
+            "category": "IGNORE",
+            "literal": "GPD Program"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "to house",
+            "pattern": [
+                {
+                    "LOWER": "to"
+                },
+                {
+                    "LOWER": "house",
+                    "POS": "VERB"
+                }
+            ]
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "<HIS/HER> housing needs",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "his",
+                            "her"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "housing"
+                },
+                {
+                    "LOWER": "needs"
+                }
+            ]
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "not pass inspection",
+            "pattern": [
+                {
+                    "LOWER": "not"
+                },
+                {
+                    "LEMMA": "pass"
+                },
+                {
+                    "POS": {
+                        "IN": [
+                            "DET",
+                            "PRON"
+                        ]
+                    },
+                    "OP": "?"
+                },
+                {
+                    "POS": "ADJ",
+                    "OP": "*"
+                },
+                {
+                    "LOWER": "inspection"
+                }
+            ]
+        },
+        {
+            "category": "VA_HOUSING",
+            "literal": "<PATIENT> <VA_SERVICE> <RESIDENCE>",
+            "pattern": [
+                {
+                    "_": {
+                        "concept_tag": "PATIENT"
+                    },
+                    "OP": "+"
+                },
+                {
+                    "_": {
+                        "concept_tag": "VA_SERVICE"
+                    },
+                    "OP": "+"
+                },
+                {
+                    "_": {
+                        "concept_tag": "RESIDENCE"
+                    },
+                    "OP": "+"
+                }
+            ]
+        },
+        {
+            "category": "VA_HOUSING",
+            "literal": "<VA_SERVICE> housing",
+            "pattern": [
+                {
+                    "_": {
+                        "concept_tag": "VA_SERVICE"
+                    },
+                    "OP": "+"
+                },
+                {
+                    "LOWER": "housing"
+                }
+            ]
+        },
+
+        {
+            "category": "VA_HOUSING",
+            "literal": "HUD-VASH application",
+            "attributes": {
+                "is_hypothetical": true
+            },
+            "pattern": [
+                {
+                    "_": {
+                        "concept_tag": {
+                            "IN": [
+                                "HUD-VASH",
+                                "VA_SERVICE"
+                            ]
+                        }
+                    },
+                    "OP": "+"
+                },
+                {
+                    "LOWER": "housing"
+                },
+                {
+                    "LOWER": "application"
+                }
+            ]
+        },
+        {
+            "category": "VA_HOUSING",
+            "literal": "HUD-VASH housing",
+            "pattern": [
+                {
+                    "_": {
+                        "concept_tag": "HUD-VASH"
+                    },
+                    "OP": "+"
+                },
+                {
+                    "LOWER": "housing"
+                }
+            ]
+        },
+        {
+            "category": "VA_HOUSING",
+            "literal": "subsidized housing"
+        },
+        {
+            "category": "VA_HOUSING",
+            "literal": "VA supported housing"
+        }
+    ]
+}

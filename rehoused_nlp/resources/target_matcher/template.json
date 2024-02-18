@@ -1,0 +1,227 @@
+{
+    "target_rules": [
+        {
+            "category": "HEADER",
+            "literal": "Homelessness:"
+        },
+        {
+            "category": "HEADER",
+            "literal": "Housing:"
+        },
+        {
+            "category": "HEADER",
+            "literal": "Plan:"
+        },
+        {
+            "category": "HEADER",
+            "literal": "SKILLS NEEDED TO MAINTAIN PERMANENT HOUSING:"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "<NUM>. Non-VA Housing",
+            "pattern": [
+                {
+                    "LIKE_NUM": true
+                },
+                {
+                    "LOWER": "."
+                },
+                {
+                    "TEXT": "Non"
+                },
+                {
+                    "TEXT": "-"
+                },
+                {
+                    "TEXT": "VA"
+                },
+                {
+                    "TEXT": "housing"
+                }
+            ]
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "apartment, room or house"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "apartment, room or house:"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "Basic services (food, shelter, clothing and financial assistance)"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "does he/she currently have an apartment"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "During the past 30 days (1 month), how many days did you sleep in the following kinds of places?"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "Emergency shelter (ES), including hotel or motel paid for with emergency shelter voucher"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "Emergency Shelter (ES), or Safe Haven (SH) in the past three years?"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "Emergency shelter, including hotel or motel paid for with emergency shelter voucher"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "Have you been attacked or beaten up since you've become homeless?"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "Homelessness carries its own stressors and triggers that can lead to affective and emotional problems"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "Hospital or Nursing home"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "How long have you been homeless?"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "How many months in total have you been homeless in the past three years?"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "How many separate episodes of homelessness have you experienced in the last three years?"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "i. GPD transitional housing   0"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "If a Veteran is homeless for any part of a given month, round up and count that period as one month of homelessness."
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "Include current episode of homelessness."
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "Is this Veteran a homeless individual"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "location where the Veteran was sleeping prior to move in to HUD-VASH housing"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "move-out from HUD-VASH housing"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "Non-VA halfway house program:"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "Non-VA transitional housing for homeless persons"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "Please note, each period separating the occasions of homelessness must include at least seven nights not residing in an emergency shelter, safe haven, or residing in a place meant for human habitation."
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "prior to move-in to HUD-VASH housing"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "room, apartment or house"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "Safe Haven (special transitional supportive housing or drop-in supportive service center for homeless SMI individuals)"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "Shelter for the homeless (including detox centers with no medical staff on-site)"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "Shelter/Temporary Housing program"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "Staying or living in family member's room, apartment or house"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "Staying or living in friend's room, apartment or house"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "What is the total number of times you have been homeless on the street"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "What is the total number of times you have been homeless on the street, in \nEmergency Shelter (ES), or Safe Haven (SH) in the past three years?"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "What is the Veteran's housing arrangement at program exit?"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "With whom will the Veteran be living at program exit?"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "X episodes of homelessness",
+            "pattern": [
+                {
+                    "LIKE_NUM": true
+                },
+                {
+                    "LEMMA": "episode"
+                },
+                {
+                    "LOWER": "of"
+                },
+                {
+                    "LOWER": "homelessness"
+                }
+            ]
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "X months of homelessness in all",
+            "pattern": [
+                {
+                    "LIKE_NUM": true,
+                    "OP": "?"
+                },
+                {
+                    "LEMMA": "month"
+                },
+                {
+                    "LOWER": "of"
+                },
+                {
+                    "LOWER": "homelessness"
+                },
+                {
+                    "LOWER": "in"
+                },
+                {
+                    "LOWER": "all"
+                }
+            ]
+        },
+        {
+            "category": "TEMPLATE_CANDIDATE",
+            "literal": "c. Temporary Rental Assistance"
+        }
+    ]
+}

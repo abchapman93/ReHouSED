@@ -1,0 +1,244 @@
+{
+    "context_rules": [
+        {
+            "terminated_by": [],
+            "literal": "after",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HISTORICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "before this",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": "before"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "this",
+                            "that"
+                        ]
+                    }
+                }
+            ],
+            "max_scope": 15,
+            "category": "HISTORICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "formerly",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HISTORICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "he left",
+            "direction": "BIDIRECTIONAL",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "he",
+                            "she"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "left"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HISTORICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "history of",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "history",
+                            "hx"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "of"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOMELESSNESS"
+            ],
+            "category": "HISTORICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "in the past",
+            "direction": "BIDIRECTIONAL",
+            "max_scope": 5,
+            "category": "HISTORICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "move out",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LEMMA": "move"
+                },
+                {
+                    "LOWER": "out"
+                }
+            ],
+            "max_scope": 15,
+            "category": "HISTORICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "on and off",
+            "direction": "BIDIRECTIONAL",
+            "max_scope": 15,
+            "category": "HISTORICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "past medical history of",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": "past"
+                },
+                {
+                    "LOWER": "medical"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "history",
+                            "hx"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "of",
+                    "OP": "?"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOMELESSNESS"
+            ],
+            "category": "HISTORICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "pmhx of",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "pmh",
+                            "pmhx"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "of",
+                    "OP": "?"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOMELESSNESS"
+            ],
+            "category": "HISTORICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "previously",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HISTORICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "prior to",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HISTORICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "resolved on",
+            "direction": "BACKWARD",
+            "max_scope": 15,
+            "category": "HISTORICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "the last X months",
+            "direction": "BIDIRECTIONAL",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "last",
+                            "past"
+                        ]
+                    }
+                },
+                {
+                    "OP": "?"
+                },
+                {
+                    "LEMMA": "month"
+                }
+            ],
+            "max_scope": 15,
+            "category": "HISTORICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "within the last N years",
+            "direction": "BIDIRECTIONAL",
+            "pattern": [
+                {
+                    "LOWER": "within"
+                },
+                {
+                    "LOWER": "the",
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "last"
+                },
+                {
+                    "LIKE_NUM": true
+                },
+                {
+                    "LOWER": "years"
+                }
+            ],
+            "max_scope": 15,
+            "category": "HISTORICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "within the last year",
+            "direction": "BIDIRECTIONAL",
+            "max_scope": 15,
+            "category": "HISTORICAL"
+        }
+    ]
+}

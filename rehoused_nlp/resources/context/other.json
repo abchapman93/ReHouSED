@@ -1,0 +1,217 @@
+{
+    "context_rules": [
+        {
+            "terminated_by": [],
+            "literal": "but",
+            "direction": "TERMINATE",
+            "max_scope": 15,
+            "category": "CONJ"
+        },
+        {
+            "terminated_by": [],
+            "literal": "plan:",
+            "direction": "TERMINATE",
+            "max_scope": 15,
+            "category": "IGNORE"
+        },
+        {
+            "terminated_by": [],
+            "literal": "<NUMBERED_LIST>",
+            "direction": "BIDIRECTIONAL",
+            "pattern": "\\n *[\\d]{1,2}\\.\\s+[A-Z]",
+            "max_scope": 15,
+            "category": "LIST"
+        },
+        {
+            "terminated_by": [],
+            "literal": "()",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "NOT_RELEVANT"
+        },
+        {
+            "terminated_by": [],
+            "literal": "[]",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "NOT_RELEVANT"
+        },
+        {
+            "terminated_by": [],
+            "literal": "___",
+            "direction": "FORWARD",
+            "max_scope": 2,
+            "category": "NOT_RELEVANT"
+        },
+        {
+            "terminated_by": [],
+            "literal": "dental",
+            "direction": "BIDIRECTIONAL",
+            "max_scope": 1,
+            "allowed_types": [
+                "EVIDENCE_OF_HOMELESSNESS"
+            ],
+            "category": "NOT_RELEVANT"
+        },
+        {
+            "terminated_by": [],
+            "literal": "not report",
+            "direction": "FORWARD",
+            "max_scope": 5,
+            "category": "NOT_RELEVANT"
+        },
+        {
+            "terminated_by": [],
+            "literal": "phone number",
+            "direction": "BACKWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "phone"
+                    }
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "num",
+                            "no",
+                            "no.",
+                            "number"
+                        ]
+                    }
+                }
+            ],
+            "max_scope": 15,
+            "category": "NOT_RELEVANT"
+        },
+        {
+            "terminated_by": [],
+            "literal": "working definition",
+            "direction": "BIDIRECTIONAL",
+            "max_scope": 15,
+            "category": "NOT_RELEVANT"
+        },
+        {
+            "terminated_by": [],
+            "literal": "had been residing in",
+            "direction": "PSEUDO",
+            "pattern": [
+                {
+                    "LOWER": "had"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "been"
+                        ]
+                    },
+                    "OP": "?"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "living",
+                            "residing"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "in"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING",
+                "EVIDENCE_OF_HOMELESSNESS",
+                "TEMPORARY_HOUSING",
+                "VA_HOUSING"
+            ],
+            "category": "PSEUDO"
+        },
+        {
+            "terminated_by": [],
+            "literal": "not in danger",
+            "direction": "PSEUDO",
+            "max_scope": 15,
+            "category": "PSEUDO"
+        },
+        {
+            "terminated_by": [],
+            "literal": "not provided",
+            "direction": "PSEUDO",
+            "max_scope": 15,
+            "category": "PSEUDO"
+        },
+        {
+            "terminated_by": [],
+            "literal": "was residing in",
+            "direction": "PSEUDO",
+            "pattern": [
+                {
+                    "LOWER": "was"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "residing",
+                            "living"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "in"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING",
+                "EVIDENCE_OF_HOMELESSNESS",
+                "TEMPORARY_HOUSING",
+                "VA_HOUSING"
+            ],
+            "category": "PSEUDO"
+        },
+        {
+            "terminated_by": [],
+            "literal": "will provide transport",
+            "direction": "PSEUDO",
+            "pattern": [
+                {
+                    "LOWER": "will"
+                },
+                {
+                    "LOWER": "provide"
+                },
+                {
+                    "LOWER": {
+                        "REGEX": "^transport"
+                    }
+                }
+            ],
+            "max_scope": 15,
+            "category": "PSEUDO"
+        },
+        {
+            "terminated_by": [],
+            "literal": "as he",
+            "direction": "TERMINATE",
+            "pattern": [
+                {
+                    "LOWER": "as"
+                },
+                {
+                    "POS": "PRON"
+                }
+            ],
+            "max_scope": 15,
+            "category": "TERMINATE"
+        },
+        {
+            "literal": "?",
+            "category": "NOT_RELEVANT",
+            "direction": "BACKWARD",
+            "on_match": "disambiguate_question_mark"
+        }
+
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "target_rules": [
+        
+        {
+            "category": "EVIDENCE_OF_HOMELESSNESS",
+            "literal": "<RESIDES> in <PROPN> Park",
+            "pattern": [
+                {
+                    "_": {
+                        "concept_tag": "RESIDES"
+                    },
+                    "OP": "+"
+                },
+                {
+                    "LOWER": "the",
+                    "OP": "?"
+                },
+                {
+                    "IS_TITLE": true,
+                    "OP": "+"
+                },
+                {
+                    "LOWER": "park"
+                }
+            ]
+        }
+    ]
+}

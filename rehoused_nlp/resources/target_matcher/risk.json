@@ -1,0 +1,394 @@
+{
+    "target_rules": [
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "<PRON> housing needs",
+            "pattern": [
+                {
+                    "POS": "PRON"
+                },
+                {
+                    "LOWER": "housing"
+                },
+                {
+                    "LOWER": "needs"
+                }
+            ]
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "at risk of losing housing"
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "concerns about housing",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "concerns?"
+                    }
+                },
+                {
+                    "LOWER": "about"
+                },
+                {
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "housing"
+                }
+            ]
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "difficulty locating housing"
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "Economic Problem",
+            "pattern": [
+                {
+                    "LOWER": "economic"
+                },
+                {
+                    "LOWER": {
+                        "REGEX": "^problem"
+                    }
+                }
+            ]
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "evicted",
+            "pattern": [
+                {
+                    "LOWER": "evicted"
+                }
+            ]
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "evicted",
+            "pattern": [
+                {
+                    "LOWER": "evicted"
+                },
+                {
+                    "LOWER": "from"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "his",
+                            "her",
+                            "their"
+                        ]
+                    },
+                    "OP": "?"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "house",
+                            "apartment",
+                            "condo",
+                            "room"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "eviction notice"
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "homeless referral"
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "housing and X needs",
+            "pattern": [
+                {
+                    "LOWER": "housing"
+                },
+                {
+                    "LOWER": "and"
+                },
+                {
+                    "OP": "?"
+                },
+                {
+                    "LEMMA": "need",
+                    "POS": "NOUN"
+                }
+            ]
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "housing difficulties",
+            "pattern": [
+                {
+                    "LOWER": "housing"
+                },
+                {
+                    "LEMMA": "difficulty"
+                }
+            ]
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "housing instability",
+            "pattern": [
+                {
+                    "LOWER": "housing"
+                },
+                {
+                    "LEMMA": "instability"
+                }
+            ]
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "housing needs",
+            "pattern": [
+                {
+                    "LOWER": "housing"
+                },
+                {
+                    "LEMMA": "need"
+                }
+            ]
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "housing problems"
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "housing problems: <ICD-10>",
+            "attributes": {
+                "is_historical": true
+            },
+            "pattern": "housing (problems|issues):?[\\s]+\\(?[a-z][\\d]{2}\\.[\\d]+"
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "housing/X difficulties",
+            "pattern": [
+                {
+                    "LOWER": "housing"
+                },
+                {
+                    "TEXT": "/"
+                },
+                {},
+                {
+                    "LEMMA": "difficulty"
+                }
+            ]
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "in need of rental assistance",
+            "pattern": [
+                {
+                    "LOWER": "in"
+                },
+                {
+                    "LOWER": "need"
+                },
+                {
+                    "LOWER": "of"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "rental",
+                            "housing"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "help",
+                            "assistance"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "lack of stable housing"
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "need rental assistance",
+            "pattern": [
+                {
+                    "LEMMA": {
+                        "IN": [
+                            "need",
+                            "require",
+                            "request"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "rental",
+                            "housing"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "help",
+                            "assistance"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "Other problems related to housing and economic circumstances"
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "owe $<NUM>",
+            "pattern": [
+                {
+                    "LEMMA": "owe"
+                },
+                {
+                    "LOWER": "$"
+                },
+                {
+                    "LIKE_NUM": true
+                }
+            ]
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "Problem related to housing and economic circumstances, unspecified"
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "re-house"
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "risk of homelessness"
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "stopped paying rent",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "^stop"
+                    }
+                },
+                {
+                    "LOWER": "paying"
+                },
+                {
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "rent"
+                }
+            ]
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "unable to pay bills",
+            "pattern": [
+                {
+                    "LOWER": "unable"
+                },
+                {
+                    "LOWER": "to"
+                },
+                {
+                    "LOWER": "pay"
+                },
+                {
+                    "OP": "?"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "bills",
+                            "rent"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "Unspecified housing or economic circumstance"
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "Unspecified Housing or Economic Problem (Z59.9)"
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "Unstably housed",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "unstabl"
+                    }
+                },
+                {
+                    "LOWER": {
+                        "REGEX": "hous(ed|ing)"
+                    }
+                }
+            ]
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "v60.9"
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "veteran's housing needs",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "veteran",
+                            "patient"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "'s"
+                },
+                {
+                    "LOWER": "housing"
+                },
+                {
+                    "LOWER": "needs"
+                }
+            ]
+        },
+        {
+            "category": "RISK_OF_HOMELESSNESS",
+            "literal": "z59.8",
+            "attributes": {
+                "is_historical": true
+            }
+        }
+    ]
+}

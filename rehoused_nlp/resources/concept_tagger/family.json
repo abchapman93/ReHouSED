@@ -1,0 +1,188 @@
+{
+    "target_rules": [
+        {
+            "category": "FAMILY",
+            "literal": "aunt"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "aunts"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "boyfriend"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "brother"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "brothers"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "buddies"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "buddy"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "daughter"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "daughters"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "father"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "fathers"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "fiance"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "fiancee"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "friend"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "friends"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "girlfriend"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "granddaughter"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "granddaughters"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "grandfather"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "grandfathers"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "grandmother"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "grandmothers"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "grandparent"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "grandparents"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "grandson"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "grandsons"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "mother"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "mothers"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "nephew"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "nephews"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "niece"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "nieces"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "non relative"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "non relatives"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "non-relative"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "non-relatives"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "parent"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "parents"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "relative"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "relatives"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "sister"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "sisters"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "son"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "sons"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "uncle"
+        },
+        {
+            "category": "FAMILY",
+            "literal": "uncles"
+        }
+    ]
+}

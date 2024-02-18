@@ -1,0 +1,307 @@
+{
+    "context_rules": [
+        {
+            "terminated_by": [],
+            "literal": ": denied",
+            "direction": "BACKWARD",
+            "pattern": [
+                {
+                    "LOWER": ":"
+                },
+                {
+                    "LOWER": {
+                        "REGEX": "denie[ds]"
+                    }
+                }
+            ],
+            "max_scope": 5,
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": ": no",
+            "direction": "BACKWARD",
+            "max_scope": 5,
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": ": None",
+            "direction": "BACKWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "):"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "None"
+                }
+            ],
+            "max_scope": 15,
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": ": Yes [ ]  No [X]",
+            "direction": "BACKWARD",
+            "max_scope": 15,
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": "declined",
+            "direction": "BIDIRECTIONAL",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "decline",
+                            "declining"
+                        ]
+                    }
+                }
+            ],
+            "max_scope": 5,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": "denial",
+            "direction": "FORWARD",
+            "max_scope": 5,
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": "denies",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "denied",
+                            "denies"
+                        ]
+                    }
+                }
+            ],
+            "max_scope": 5,
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": "denies risk",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "denie[d|s]"
+                    }
+                },
+                {
+                    "LOWER": "risk"
+                },
+                {
+                    "LOWER": "of",
+                    "OP": "?"
+                }
+            ],
+            "max_scope": 5,
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "literal": "doesn't have",
+            "category": "NEGATED_EXISTENCE",
+            "pattern": [
+                {"LOWER": "does"},
+                {"LOWER": {"IN": ["n't", "not"]}},
+                {"LOWER": "have"}
+            ]
+        },
+        {
+            "terminated_by": [],
+            "literal": "fell through",
+            "direction": "BACKWARD",
+            "pattern": [
+                {
+                    "LEMMA": "fall"
+                },
+                {
+                    "LOWER": "through"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": "has no",
+            "direction": "FORWARD",
+            "max_scope": 5,
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": "inability to pay",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": "lacks",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": "no",
+            "direction": "FORWARD",
+            "max_scope": 5,
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": "not",
+            "direction": "FORWARD",
+            "max_scope": 5,
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": "not currently",
+            "direction": "FORWARD",
+            "max_scope": 5,
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": "not eligible for",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": "not have",
+            "direction": "FORWARD",
+            "max_scope": 5,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": "not interested in",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": "not pay",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": "not"
+                },
+                {
+                    "LEMMA": "pay"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": "not want",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "NEGATED_EXISTENCE",
+            "excluded_types": [
+                "EVIDENCE_OF_HOMELESSNESS"
+            ]
+        },
+        {
+            "terminated_by": [],
+            "literal": "overcame",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "overc[oa]me"
+                    }
+                }
+            ],
+            "max_scope": 5,
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": "refuse",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LEMMA": "refuse"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": "resolved",
+            "direction": "BACKWARD",
+            "max_scope": 5,
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": "unable to",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "NEGATED_EXISTENCE"
+        },
+        {
+            "terminated_by": [],
+            "literal": "without",
+            "direction": "FORWARD",
+            "max_scope": 5,
+            "category": "NEGATED_EXISTENCE"
+        }
+    ]
+}

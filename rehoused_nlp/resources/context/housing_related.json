@@ -1,0 +1,322 @@
+{
+    "context_rules": [
+        {
+            "terminated_by": [],
+            "literal": "approved",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": "approved"
+                },
+                {
+                    "LOWER": "for",
+                    "OP": "?"
+                }
+            ],
+            "max_scope": 15,
+            "category": "ACCEPTED"
+        },
+        {
+            "terminated_by": [],
+            "literal": "was accepted",
+            "direction": "BIDIRECTIONAL",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "was",
+                            "been"
+                        ]
+                    },
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "accepted"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "to",
+                            "into"
+                        ]
+                    },
+                    "OP": "?"
+                }
+            ],
+            "max_scope": 15,
+            "category": "ACCEPTED"
+        },
+        {
+            "terminated_by": [],
+            "literal": "enrolled",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "enroll",
+                            "enrolled"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "in",
+                            "into",
+                            "participant"
+                        ]
+                    },
+                    "OP": "?"
+                }
+            ],
+            "max_scope": 15,
+            "category": "ENROLLMENT"
+        },
+        {
+            "terminated_by": [],
+            "literal": "pay",
+            "direction": "BIDIRECTIONAL",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "pay",
+                            "paid",
+                            "pays"
+                        ]
+                    }
+                }
+            ],
+            "max_scope": 15,
+            "category": "PAYMENT"
+        },
+        {
+            "terminated_by": [],
+            "literal": "denies any concerns",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LEMMA": "deny"
+                },
+                {
+                    "LOWER": "any"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "concerns",
+                            "issues",
+                            "problems"
+                        ]
+                    }
+                }
+            ],
+            "max_scope": 15,
+            "category": "POSITIVE_HOUSING"
+        },
+        {
+            "terminated_by": [],
+            "literal": "is able to afford",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LEMMA": "be"
+                },
+                {
+                    "LOWER": "able"
+                },
+                {
+                    "LOWER": "to"
+                },
+                {
+                    "LOWER": "afford"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "POSITIVE_HOUSING"
+        },
+        {
+            "terminated_by": [],
+            "literal": "no issues with",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "no",
+                            "any"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "issues"
+                },
+                {
+                    "LOWER": "with"
+                }
+            ],
+            "max_scope": 15,
+            "category": "POSITIVE_HOUSING"
+        },
+        {
+            "terminated_by": [],
+            "literal": "continues to reside in",
+            "direction": "BIDIRECTIONAL",
+            "pattern": [
+                {
+                    "LOWER": "continues"
+                },
+                {
+                    "LOWER": "to"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "reside",
+                            "live"
+                        ]
+                    }
+                }
+            ],
+            "max_scope": 15,
+            "category": "RESIDES_IN"
+        },
+        {
+            "terminated_by": [],
+            "literal": "moving into",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "moved",
+                            "moving",
+                            "transition",
+                            "transitioning"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "to",
+                            "into"
+                        ]
+                    }
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING",
+                "EVIDENCE_OF_HOMELESSNESS",
+                "TEMPORARY_HOUSING",
+                "VA_HOUSING"
+            ],
+            "category": "RESIDES_IN"
+        },
+        {
+            "terminated_by": [],
+            "literal": "resides in",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "lives",
+                            "living",
+                            "resides",
+                            "currently"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "in"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING",
+                "EVIDENCE_OF_HOMELESSNESS",
+                "TEMPORARY_HOUSING",
+                "VA_HOUSING"
+            ],
+            "category": "RESIDES_IN"
+        },
+        {
+            "terminated_by": [],
+            "literal": "resides in",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "_": {
+                        "concept_tag": "RESIDES"
+                    },
+                    "OP": "+"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING",
+                "EVIDENCE_OF_HOMELESSNESS",
+                "TEMPORARY_HOUSING",
+                "VA_HOUSING"
+            ],
+            "category": "RESIDES_IN"
+        },
+        {
+            "terminated_by": [],
+            "literal": "sleep in",
+            "direction": "BIDIRECTIONAL",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "sleep",
+                            "sleeps"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "in",
+                            "at"
+                        ]
+                    }
+                }
+            ],
+            "max_scope": 15,
+            "category": "SLEEPS_IN"
+        },
+        {
+            "literal": "visit",
+            "category": "HYPOTHETICAL",
+            "direction": "FORWARD",
+            "allowed_types": ["EVIDENCE_OF_HOUSING"],
+            "pattern": [{"LOWER": {"IN": ["visit", "visited"]}}]
+        },
+        {
+            "literal": "home visit",
+            "category": "PSEUDO",
+            "direction": "PSEUDO",
+            "pattern": [
+                {"LOWER": "home"},
+                {"LOWER": {"IN": ["visit", "visited"]}}
+            ]
+        },
+        {
+            "literal": "visit",
+            "category": "PSEUDO",
+            "direction": "PSEUDO",
+            "pattern": [
+                {"LOWER": "home"},
+                {"LOWER": {"IN": ["visit", "visited"]}},
+                {"LOWER": {"REGEX": "veteran|his|her|location"}}
+            ]
+        }
+    ]
+}

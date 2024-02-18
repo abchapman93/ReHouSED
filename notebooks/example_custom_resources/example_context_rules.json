@@ -1,0 +1,13 @@
+{
+  "context_rules": [
+    {
+      "category": "HISTORICAL",
+      "literal": "in Xxx 20xx",
+      "pattern":[
+                      {"LOWER": "in"},
+                      {"OP": "?"},
+                      {"LOWER": {"REGEX": "20[01]\\d$"}}
+                  ]
+    }
+  ]
+}

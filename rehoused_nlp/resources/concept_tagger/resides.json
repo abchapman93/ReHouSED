@@ -1,0 +1,100 @@
+{
+    "target_rules": [
+        {
+            "category": "RESIDENCE",
+            "literal": "apartment",
+            "pattern": [
+                {
+                    "IS_TITLE": true,
+                    "OP": "+"
+                },
+                {
+                    "LOWER": {
+                        "REGEX": "apartment"
+                    }
+                }
+            ]
+        },
+        {
+            "category": "RESIDENCE",
+            "literal": "apartment"
+        },
+        {
+            "category": "RESIDENCE",
+            "literal": "apt"
+        },
+        {
+            "category": "RESIDENCE",
+            "literal": "apt."
+        },
+        {
+            "category": "RESIDENCE",
+            "literal": "condo"
+        },
+        {
+            "category": "RESIDENCE",
+            "literal": "home"
+        },
+        {
+            "category": "RESIDENCE",
+            "literal": "house"
+        },
+        {
+            "category": "RESIDENCE",
+            "literal": "housing"
+        },
+        {
+            "category": "RESIDENCE",
+            "literal": "place"
+        },
+        {
+            "category": "RESIDENCE",
+            "literal": "stable housing"
+        },
+        {
+            "category": "RESIDENCE",
+            "literal": "unit"
+        },
+        {
+            "category": "RESIDES",
+            "literal": "<RESIDES>",
+            "pattern": [
+                {
+                    "LEMMA": {
+                        "IN": [
+                            "reside",
+                            "stay",
+                            "live",
+                            "sleep"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "in",
+                            "at"
+                        ]
+                    },
+                    "OP": "?"
+                }
+            ]
+        },
+        {
+            "category": "RESIDES",
+            "literal": "current living situation:"
+        },
+        {
+            "category": "RESIDES",
+            "literal": "move in",
+            "pattern": [
+                {
+                    "LEMMA": "move"
+                },
+                {
+                    "LOWER": "in"
+                }
+            ]
+        }
+    ]
+}

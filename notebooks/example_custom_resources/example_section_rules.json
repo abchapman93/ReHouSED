@@ -1,0 +1,8 @@
+{
+  "section_rules": [
+    {
+      "category": "past_medical_history",
+      "literal": "Previous medical information:"
+    }
+  ]
+}

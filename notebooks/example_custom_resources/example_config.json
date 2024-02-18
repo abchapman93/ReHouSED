@@ -1,0 +1,16 @@
+{
+    "resources": [
+        {
+
+            "context": [
+                "example_context_rules.json"
+            ],
+            "sectionizer": [
+                 "example_section_rules.json"
+            ],
+            "target_matcher": [
+                "example_target_rules.json"
+            ]
+        }
+    ]
+}

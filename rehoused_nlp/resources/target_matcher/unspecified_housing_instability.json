@@ -1,0 +1,28 @@
+{
+    "target_rules": [
+        {
+            "category": "EVIDENCE_OF_HOMELESSNESS",
+            "literal": "housing instability"
+        },
+        {
+            "category": "EVIDENCE_OF_HOMELESSNESS",
+            "literal": "housing issues",
+            "pattern": [
+                {"LOWER": "housing"},
+                {"LOWER": {"IN": ["issue", "issues"]}}
+            ]
+        },
+        {
+            "category": "EVIDENCE_OF_HOMELESSNESS",
+            "literal": "doesn't have housing",
+            "pattern": [
+                {"LOWER": "does"},
+                {"LOWER": {"IN": ["n't", "not"]}},
+                {"LOWER": "have"},
+                {"OP": "?"},
+                {"LOWER": "housing"}
+            ],
+            "on_match": "followed_by_issues"
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+  "texts": [
+
+  {
+    "document":  "The patient is homeless.",
+    "ents": [
+      {
+        "label":  "EVIDENCE_OF_HOMELESSNESS",
+        "text": "homeless"
+      }
+    ],
+    "document_classification": "UNSTABLY_HOUSED",
+  }
+
+  ]
+}

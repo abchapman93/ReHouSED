@@ -1,0 +1,54 @@
+{
+    "section_rules": [
+        {
+            "parent_required": false,
+            "literal": "Housing stability: How would you describe the Veteran?s housing situation at program exit?",
+            "category": "KNOWN_QUESTIONNAIRE"
+        },
+        {
+            "parent_required": false,
+            "literal": "Housing stability: How would you describe your current housing situation?",
+            "category": "KNOWN_QUESTIONNAIRE"
+        },
+        {
+            "parent_required": false,
+            "literal": "How would you describe the Veteran's housing situation at program exit?",
+            "category": "KNOWN_QUESTIONNAIRE"
+        },
+        {
+            "parent_required": false,
+            "literal": "In the past 2 months, have you been living in stable housing that you own, rent, or stay in as part of a household?",
+            "category": "KNOWN_QUESTIONNAIRE"
+        },
+        {
+            "parent_required": false,
+            "literal": "What is the Veteran's housing arrangement at program exit?",
+            "category": "KNOWN_QUESTIONNAIRE"
+        },
+        {
+            "parent_required": false,
+            "literal": "What was the Veteran's housing arrangement prior to program entry",
+            "category": "KNOWN_QUESTIONNAIRE"
+        },
+        {
+            "parent_required": false,
+            "literal": "Where are you currently living?",
+            "category": "KNOWN_QUESTIONNAIRE"
+        },
+        {
+            "parent_required": false,
+            "literal": "YES: In the past 2 months, have you been living in stable housing that you own, rent, or stay in as part of a household?",
+            "category": "KNOWN_QUESTIONNAIRE"
+        },
+        {
+            "parent_required": false,
+            "literal": "During the past 30 days (1 month), how many days did you sleep in the following kinds of places?",
+            "category": "last_30_days_questionnaire"
+        },
+        {
+            "parent_required": false,
+            "literal": "Referral Form",
+            "category": "referral_form"
+        }
+    ]
+}

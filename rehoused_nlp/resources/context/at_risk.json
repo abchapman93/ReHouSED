@@ -1,0 +1,171 @@
+{
+    "context_rules": [
+        {
+            "terminated_by": [],
+            "literal": "at risk",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "AT_RISK"
+        },
+        {
+            "terminated_by": [],
+            "literal": "AXIS IV",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "AT_RISK"
+        },
+        {
+            "terminated_by": [],
+            "literal": "cannot afford",
+            "direction": "FORWARD",
+            "pattern": "can('t|not) (afford|pay)",
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "AT_RISK"
+        },
+        {
+            "terminated_by": [],
+            "literal": "fail inspection",
+            "direction": "BIDIRECTIONAL",
+            "pattern": [
+                {
+                    "LEMMA": "fail"
+                },
+                {
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "inspection"
+                }
+            ],
+            "max_scope": 15,
+            "category": "AT_RISK"
+        },
+        {
+            "terminated_by": [],
+            "literal": "in jeopardy",
+            "direction": "BIDIRECTIONAL",
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "AT_RISK"
+        },
+        {
+            "terminated_by": [],
+            "literal": "kicked out",
+            "direction": "BIDIRECTIONAL",
+            "pattern": [
+                {
+                    "LEMMA": "kick"
+                },
+                {
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "out"
+                }
+            ],
+            "max_scope": 15,
+            "category": "AT_RISK"
+        },
+        {
+            "terminated_by": [],
+            "literal": "late",
+            "direction": "BIDIRECTIONAL",
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "AT_RISK"
+        },
+        {
+            "terminated_by": [],
+            "literal": "losing",
+            "direction": "BIDIRECTIONAL",
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "AT_RISK"
+        },
+        {
+            "terminated_by": [],
+            "literal": "loss",
+            "direction": "BACKWARD",
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "AT_RISK"
+        },
+        {
+            "terminated_by": [],
+            "literal": "loss of",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "AT_RISK"
+        },
+        {
+            "terminated_by": [],
+            "literal": "lost",
+            "direction": "BIDIRECTIONAL",
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "AT_RISK"
+        },
+        {
+            "terminated_by": [],
+            "literal": "need for",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "AT_RISK"
+        },
+        {
+            "terminated_by": [],
+            "literal": "not found",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "AT_RISK"
+        },
+        {
+            "terminated_by": [],
+            "literal": "not pass inspection",
+            "direction": "BIDIRECTIONAL",
+            "max_scope": 15,
+            "category": "AT_RISK"
+        },
+        {
+            "terminated_by": [],
+            "literal": "stressors",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "AT_RISK"
+        },
+        {
+            "terminated_by": [],
+            "literal": "vulnerable to",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "vulnerab"
+                    }
+                },
+                {
+                    "LOWER": "to"
+                }
+            ],
+            "max_scope": 15,
+            "category": "AT_RISK"
+        }
+    ]
+}

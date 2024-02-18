@@ -1,0 +1,95 @@
+{
+    "context_rules": [
+        {
+            "terminated_by": [],
+            "literal": "again",
+            "direction": "BIDIRECTIONAL",
+            "max_scope": 2,
+            "category": "CURRENT"
+        },
+        {
+            "terminated_by": [],
+            "literal": "current episode",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOMELESSNESS"
+            ],
+            "category": "CURRENT"
+        },
+        {
+            "terminated_by": [],
+            "literal": "currently",
+            "direction": "BIDIRECTIONAL",
+            "max_scope": 15,
+            "category": "CURRENT"
+        },
+        {
+            "terminated_by": [],
+            "literal": "in the past few days",
+            "direction": "BIDIRECTIONAL",
+            "pattern": [
+                {
+                    "LOWER": "in"
+                },
+                {
+                    "LOWER": "the",
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "past"
+                },
+                {
+                    "LOWER": "few"
+                },
+                {
+                    "LOWER": "days"
+                }
+            ],
+            "max_scope": 15,
+            "category": "CURRENT"
+        },
+        {
+            "terminated_by": [],
+            "literal": "in the past N days",
+            "direction": "BIDIRECTIONAL",
+            "pattern": [
+                {
+                    "LOWER": "in"
+                },
+                {
+                    "LOWER": "the",
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "past"
+                },
+                {
+                    "LIKE_NUM": true
+                },
+                {
+                    "LOWER": "days"
+                }
+            ],
+            "max_scope": 15,
+            "category": "CURRENT"
+        },
+        {
+            "terminated_by": [],
+            "literal": "maintain",
+            "direction": "BIDIRECTIONAL",
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "CURRENT"
+        },
+        {
+            "terminated_by": [],
+            "literal": "recently",
+            "direction": "BIDIRECTIONAL",
+            "max_scope": 15,
+            "category": "CURRENT"
+        }
+    ]
+}

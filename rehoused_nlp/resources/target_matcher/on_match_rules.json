@@ -1,0 +1,121 @@
+{
+    "target_rules": [
+        {
+            "category": "EVIDENCE_OF_HOMELESSNESS",
+            "literal": "Veteran Meets Homeless Criteria:",
+            "on_match": "parse_question_response_checkmark_right_yes"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "Veteran is CHRONICALLY Homeless:",
+            "on_match": "parse_question_response_checkmark_right_not_yes"
+        },
+        {
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "his",
+                            "her"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "home"
+                }
+            ],
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "<his/her> home",
+            "on_match": "his_her_home"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "stable housing",
+            "on_match": "disambiguate_housing"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "permanent housing",
+            "on_match": "permanent_housing_program"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "stable housing",
+            "on_match": "disambiguate_housing"
+        },
+        {
+            "category": "EVIDENCE_OF_HOUSING",
+            "literal": "With whom will the Veteran be living at program exit?",
+            "on_match": "parse_who_wil_vet_live_with"
+        },
+        {
+            "pattern": [
+                {
+                    "LEMMA": {
+                        "IN": [
+                            "stay",
+                            "sleep",
+                            "crash"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "with"
+                },
+                {
+                    "OP": "?"
+                },
+                {
+                    "POS": "PRON"
+                }
+            ],
+            "category": "DOUBLING_UP",
+            "literal": "living with <PRON>",
+            "on_match": "resolve_family_coreference_true"
+        },
+        {
+            "pattern": [
+                {
+                    "TEXT": {
+                        "REGEX": "^[a-z]\\."
+                    }
+                }
+            ],
+            "category": "TEMPLATE_CANDIDATE",
+            "literal": "a. <...>   0",
+            "on_match": "questionnaire_0_match"
+        },
+        {
+            "pattern": [
+                {
+                    "LOWER": "_"
+                },
+                {
+                    "LOWER": "_"
+                },
+                {
+                    "LOWER": "_",
+                    "OP": "+"
+                }
+            ],
+            "category": "TEMPLATE_CANDIDATE",
+            "literal": "___ ...",
+            "on_match": "blank_line_checkmark_match"
+        },
+        {
+            "category": "QUESTION_SLOT",
+            "literal": "Where do you see yourself living?",
+            "on_match": "ignore_next_sentence"
+        },
+        {
+            "category": "QUESTION_SLOT",
+            "literal": "is Veteran chronically homeless?",
+            "on_match": "parse_question_response_next_word_homeless"
+        },
+        {
+            "category": "QUESTION_SLOT",
+            "literal": "Does the Veteran live in this apartment?",
+            "on_match": "parse_question_response_next_word_housing"
+        }
+    ]
+}

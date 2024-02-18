@@ -1,0 +1,63 @@
+{
+    "target_rules": [
+        {
+            "category": "HOMELESS_LOCATION",
+            "literal": "car"
+        },
+        {
+            "category": "HOMELESS_LOCATION",
+            "literal": "hotel"
+        },
+        {
+            "category": "HOMELESS_LOCATION",
+            "literal": "hotels"
+        },
+        {
+            "category": "HOMELESS_LOCATION",
+            "literal": "motel"
+        },
+        {
+            "category": "HOMELESS_LOCATION",
+            "literal": "motels"
+        },
+        {
+            "category": "HOMELESS_LOCATION",
+            "literal": "park"
+        },
+        {
+            "category": "HOMELESS_LOCATION",
+            "literal": "parks"
+        },
+        {
+            "category": "HOMELESS_LOCATION",
+            "literal": "the street"
+        },
+        {
+            "category": "HOMELESS_LOCATION",
+            "literal": "the streets"
+        },
+        {
+            "category": "HOMELESS_LOCATION",
+            "literal": "vehicle"
+        },
+        {
+            "category": "HOMELESS_LOCATION",
+            "literal": "woods"
+        },
+        {
+            "category": "HOMELESSNESS",
+            "literal": "...Homeless",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "homeless"
+                    }
+                }
+            ]
+        },
+        {
+            "category": "HOMELESSNESS",
+            "literal": "literally homeless"
+        }
+    ]
+}

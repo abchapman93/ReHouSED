@@ -1,0 +1,60 @@
+{
+    "context_rules": [
+        {
+            "category": "HISTORICAL",
+            "direction": "BIDIRECTIONAL",
+            "terminated_by": [],
+            "literal": "for <TIME>",
+            "pattern": [
+                {
+                    "LOWER": "for"
+                },
+                {
+                    "OP": "?"
+                },
+                {
+                    "LIKE_NUM": true,
+                    "OP": "+"
+                },
+                {
+                    "LEMMA": {
+                        "IN": [
+                            "day",
+                            "week",
+                            "month",
+                            "year"
+                        ]
+                    }
+                }
+            ],
+            "on_match": "preceded_by_was"
+        },
+        {
+            "category": "HYPOTHETICAL",
+            "direction": "FORWARD",
+            "terminated_by": [],
+            "literal": "visit",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "visit",
+                            "visited"
+                        ]
+                    }
+                }
+            ],
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "on_match": "visit_on_match"
+        },
+        {
+            "category": "NOT_RELEVANT",
+            "direction": "BACKWARD",
+            "terminated_by": [],
+            "literal": "?",
+            "on_match": "disambiguate_question_mark"
+        }
+    ]
+}

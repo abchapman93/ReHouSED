@@ -1,0 +1,1229 @@
+{
+    "context_rules": [
+        {
+            "terminated_by": [],
+            "literal": "(housing) plan",
+            "direction": "BACKWARD",
+            "pattern": [
+                {
+                    "LOWER": "plan"
+                }
+            ],
+            "max_scope": 1,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "able to",
+            "direction": "FORWARD",
+            "max_scope": 5,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "afford",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "^afford"
+                    },
+                    "POS": "VERB"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "affordable",
+            "direction": "BIDIRECTIONAL",
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "apply for",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "appl(y|ied|ication)"
+                    }
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "for",
+                            "to",
+                            "into"
+                        ]
+                    }
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING",
+                "VA_HOUSING",
+                "HOMELESSNESS_HEALTHCARE_SERVICE"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "assisting with",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LEMMA": "assist"
+                },
+                {
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "with"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "available",
+            "direction": "BACKWARD",
+            "max_scope": 2,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "avoid",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOMELESSNESS"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "awaiting",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "become",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "become",
+                            "becomes"
+                        ]
+                    }
+                }
+            ],
+            "max_scope": 5,
+            "allowed_types": [
+                "RISK_OF_HOMELESSNESS",
+                "EVIDENCE_OF_HOMELESSNESS"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "consider",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "consider"
+                    }
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "contact with",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "could be approved",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "desire to be",
+            "direction": "FORWARD",
+            "max_scope": 5,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "discuss",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LEMMA": "discuss"
+                }
+            ],
+            "max_scope": 5,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "does not want to",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "does",
+                            "do"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "not"
+                },
+                {
+                    "LOWER": "want"
+                },
+                {
+                    "LOWER": "to",
+                    "OP": "?"
+                }
+            ],
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "eligible for",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "allowed_types": [
+                "HOMELESSNESS_HEALTHCARE_SERVICE",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "eventually",
+            "direction": "BIDIRECTIONAL",
+            "max_scope": 6,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "eventually get",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "find",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "find"
+                    }
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "forms for",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "future",
+            "direction": "FORWARD",
+            "max_scope": 5,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "get",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "get",
+                            "gets",
+                            "obtain",
+                            "obtains"
+                        ]
+                    }
+                }
+            ],
+            "max_scope": 3,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "goal",
+            "direction": "BIDIRECTIONAL",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "^goal"
+                    }
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "has chosen",
+            "direction": "BIDIRECTIONAL",
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "hopes",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "hope",
+                            "hopes",
+                            "hopeful"
+                        ]
+                    }
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "hunt for",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "^hunt"
+                    }
+                },
+                {
+                    "LOWER": "for"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "identified",
+            "direction": "BIDIRECTIONAL",
+            "max_scope": 4,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "in need of",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDNECE_OF_HOUSING",
+                "TEMPORARY_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "in the future",
+            "direction": "BIDIRECTIONAL",
+            "pattern": [
+                {
+                    "LOWER": "in"
+                },
+                {
+                    "LOWER": "the"
+                },
+                {
+                    "POS": "ADJ",
+                    "OP": "*"
+                },
+                {
+                    "LOWER": "future"
+                }
+            ],
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "information regarding",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "inquire",
+            "direction": "FORWARD",
+            "max_scope": 5,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "intent to pay",
+            "direction": "BIDIRECTIONAL",
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "interested in",
+            "direction": "FORWARD",
+            "max_scope": 5,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "lead on",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "locate",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "locate",
+                            "located",
+                            "locating"
+                        ]
+                    }
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "look for",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "look"
+                    }
+                },
+                {
+                    "LOWER": "for"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "look into",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "look"
+                    }
+                },
+                {
+                    "LOWER": "into"
+                }
+            ],
+            "max_scope": 5,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "looking for",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LEMMA": "look"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "for",
+                            "at",
+                            "in"
+                        ]
+                    }
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "move forward",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LEMMA": "move"
+                },
+                {
+                    "LOWER": "forward"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "near future",
+            "direction": "BACKWARD",
+            "pattern": [
+                {
+                    "LOWER": "near"
+                },
+                {
+                    "LOWER": "future"
+                }
+            ],
+            "max_scope": 5,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "need",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "need",
+                            "needs"
+                        ]
+                    }
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "offered",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "once he isis able to afford",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "once",
+                            "when"
+                        ]
+                    }
+                },
+                {
+                    "OP": "?"
+                },
+                {
+                    "LEMMA": "be",
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "able"
+                },
+                {
+                    "LOWER": "to"
+                },
+                {
+                    "LOWER": "afford"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "once he/she",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": "once"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "he",
+                            "she"
+                        ]
+                    }
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "options for",
+            "direction": "FORWARD",
+            "max_scope": 5,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "pending",
+            "direction": "BIDIRECTIONAL",
+            "max_scope": 4,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "planing",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "plan"
+                    }
+                },
+                {
+                    "LOWER": "to",
+                    "OP": "?"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "planning",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": "has"
+                },
+                {
+                    "LEMMA": "plan"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "potential",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "preference:",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": "preference"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            ":",
+                            "for"
+                        ]
+                    }
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "prepare",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LEMMA": "prepare"
+                },
+                {
+                    "LOWER": "to",
+                    "OP": "?"
+                }
+            ],
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "prevent",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "propose",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "proposed",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "put in an application",
+            "direction": "BIDIRECTIONAL",
+            "pattern": [
+                {
+                    "LOWER": "put"
+                },
+                {
+                    "LOWER": "in"
+                },
+                {
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "application"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "qualified",
+            "direction": "BIDIRECTIONAL",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "qualif"
+                    }
+                },
+                {
+                    "LOWER": "for"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "qualify for",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "request",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LEMMA": "request"
+                }
+            ],
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "request assistance",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "screened for admission",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": "screened"
+                },
+                {
+                    "LOWER": "for"
+                },
+                {
+                    "POS": "ADJ",
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "admission"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "screening for",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "screen",
+                            "screened",
+                            "screening"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "interview",
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "for"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOMELESSNESS",
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "search",
+            "direction": "BIDIRECTIONAL",
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "search options",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "searching for",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "secure",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "secure",
+                            "secures",
+                            "securing"
+                        ]
+                    }
+                }
+            ],
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "seeking",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "seek"
+                    }
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "should be approved",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "show",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LEMMA": "show"
+                }
+            ],
+            "max_scope": 5,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "submitted application",
+            "direction": "BIDIRECTIONAL",
+            "pattern": [
+                {
+                    "LEMMA": "submit"
+                },
+                {
+                    "OP": "?"
+                },
+                {
+                    "LEMMA": "application"
+                }
+            ],
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "suggest",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "to be",
+            "direction": "FORWARD",
+            "max_scope": 5,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "until <THEY> have/find",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": "until"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "he",
+                            "she"
+                        ]
+                    }
+                },
+                {
+                    "LEMMA": {
+                        "IN": [
+                            "find",
+                            "have"
+                        ]
+                    }
+                }
+            ],
+            "max_scope": 4,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "view a X",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "view",
+                            "see"
+                        ]
+                    }
+                },
+                {
+                    "POS": "DET"
+                }
+            ],
+            "max_scope": 1,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "waiting for",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "wait(ing)?$"
+                    }
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "for",
+                            "on"
+                        ]
+                    }
+                }
+            ],
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "want",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LEMMA": "want"
+                },
+                {
+                    "LOWER": "to",
+                    "OP": "?"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "wants to move",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "will be",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HYPOTHETICAL",
+            "excluded_types": [
+                "RISK_OF_HOMELESSNESS"
+            ]
+        },
+        {
+            "terminated_by": [],
+            "literal": "will become",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOMELESSNESS"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "will obtain",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LEMMA": "will",
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "obtain"
+                }
+            ],
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "will provide",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "worried about",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "would like",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "allowed_types": [
+                "TEMPORARY_HOUSING",
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        },
+        {
+            "terminated_by": [],
+            "literal": "would prefer",
+            "direction": "FORWARD",
+            "max_scope": 15,
+            "allowed_types": [
+                "EVIDENCE_OF_HOUSING"
+            ],
+            "category": "HYPOTHETICAL"
+        }
+    ]
+}

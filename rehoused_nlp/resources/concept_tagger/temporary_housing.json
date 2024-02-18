@@ -1,0 +1,36 @@
+{
+    "target_rules": [
+        {
+            "category": "TEMPORARY_HOUSING",
+            "literal": "BOL"
+        },
+        {
+            "category": "TEMPORARY_HOUSING",
+            "literal": "Bread of Life"
+        },
+        {
+            "category": "TEMPORARY_HOUSING",
+            "literal": "homeless shelter"
+        },
+        {
+            "category": "TEMPORARY_HOUSING",
+            "literal": "homeless shelters"
+        },
+        {
+            "category": "TEMPORARY_HOUSING",
+            "literal": "Salvation Army"
+        },
+        {
+            "category": "TEMPORARY_HOUSING",
+            "literal": "shelter"
+        },
+        {
+            "category": "TEMPORARY_HOUSING",
+            "literal": "shelters"
+        },
+        {
+            "category": "TEMPORARY_HOUSING",
+            "literal": "YMCA"
+        }
+    ]
+}

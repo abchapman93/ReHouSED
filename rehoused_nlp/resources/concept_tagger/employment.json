@@ -1,0 +1,20 @@
+{
+    "target_rules": [
+        {
+            "category": "EMPLOYMENT",
+            "literal": "<DET> job",
+            "pattern": [
+                {
+                    "POS": "DET"
+                },
+                {
+                    "LOWER": "job"
+                }
+            ]
+        },
+        {
+            "category": "EMPLOYMENT",
+            "literal": "employment"
+        }
+    ]
+}

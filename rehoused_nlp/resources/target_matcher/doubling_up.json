@@ -1,0 +1,170 @@
+{
+    "target_rules": [
+        {
+            "category": "DOUBLING_UP",
+            "literal": "<PATIENT> <FAMILY> <RESIDENCE>",
+            "pattern": [
+                {
+                    "_": {
+                        "concept_tag": "PATIENT"
+                    },
+                    "OP": "+"
+                },
+                {
+                    "_": {
+                        "concept_tag": "FAMILY"
+                    },
+                    "OP": "+"
+                },
+                {
+                    "LOWER": "'s",
+                    "OP": "?"
+                },
+                {
+                    "_": {
+                        "concept_tag": "RESIDENCE"
+                    },
+                    "OP": "+"
+                }
+            ]
+        },
+        {
+            "category": "DOUBLING_UP",
+            "literal": "at <FAMILY> <RESIDENCE>",
+            "pattern": [
+                {
+                    "LOWER": "at",
+                    "OP": "?"
+                },
+                {
+                    "_": {
+                        "concept_tag": "FAMILY"
+                    },
+                    "OP": "+"
+                },
+                {
+                    "LOWER": "'s"
+                },
+                {
+                    "_": {
+                        "concept_tag": "RESIDENCE"
+                    },
+                    "OP": "+"
+                }
+            ]
+        },
+        {
+            "category": "DOUBLING_UP",
+            "literal": "couch surfing"
+        },
+        {
+            "category": "DOUBLING_UP",
+            "literal": "crashing at",
+            "pattern": [
+                {
+                    "LOWER": "crashing"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "at",
+                            "with"
+                        ]
+                    }
+                },
+                {
+                    "_": {
+                        "concept_tag": "FAMILY"
+                    },
+                    "OP": "*"
+                }
+            ]
+        },
+        {
+            "category": "DOUBLING_UP",
+            "literal": "doubling up",
+            "pattern": [
+                {
+                    "LEMMA": "double"
+                },
+                {
+                    "LOWER": "up"
+                }
+            ]
+        },
+        {
+            "category": "DOUBLING_UP",
+            "literal": "sleeping on the couch",
+            "pattern": [
+                {
+                    "LEMMA": "sleep"
+                },
+                {
+                    "LOWER": "on"
+                },
+                {
+                    "POS": "DET"
+                },
+                {
+                    "LOWER": "couch"
+                }
+            ]
+        },
+        {
+            "category": "DOUBLING_UP",
+            "literal": "staying with their <FAMILY>",
+            "pattern": [
+                {
+                    "LEMMA": {
+                        "IN": [
+                            "stay",
+                            "sleep",
+                            "crash"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "with"
+                },
+                {
+                    "OP": "?"
+                },
+                {
+                    "_": {
+                        "concept_tag": "FAMILY"
+                    },
+                    "OP": "+"
+                }
+            ]
+        },
+        {
+            "category": "DOUBLING_UP",
+            "literal": "X's apartment",
+            "pattern": [
+                {
+                    "_": {
+                        "concept_tag": "FAMILY"
+                    },
+                    "OP": "+"
+                },
+                {
+                    "LOWER": "'",
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "s",
+                    "OP": "?"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "apartment",
+                            "house",
+                            "home"
+                        ]
+                    }
+                }
+            ]
+        }
+    ]
+}

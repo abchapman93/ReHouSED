@@ -1,0 +1,27 @@
+{
+    "context_rules": [
+        {
+            "terminated_by": [],
+            "literal": "<PRON> <FAMILY>",
+            "direction": "FORWARD",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "his",
+                            "her"
+                        ]
+                    }
+                },
+                {
+                    "_": {
+                        "concept_tag": "FAMILY"
+                    },
+                    "OP": "+"
+                }
+            ],
+            "max_scope": 15,
+            "category": "FAMILY"
+        }
+    ]
+}

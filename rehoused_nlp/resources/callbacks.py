@@ -2,6 +2,37 @@ from medspacy.postprocess import postprocessing_functions
 import re
 """This module contains callback functions to be used in spaCy's matcher classes."""
 
+def get_next_non_ws_tokens(token, window=1):
+    next_tokens = []
+    for next_token in token.doc[token.i+1:]:
+        if next_token.is_space is False:
+            next_tokens.append(next_token)
+        if len(next_tokens) == window:
+            return next_tokens
+    return next_tokens
+
+def disambiguate_question_mark(matcher, doc, i, matches):
+    """Sentences ending in a question mark are often templates which shouldn't be considered
+    positive evidence. However, if it's followed by either a 'Yes' or a 'No', we may
+    want to use it as either a positive modifier or a negation modifier.
+    """
+    match_id, start, end = matches[i]
+
+    span = doc[start:end]
+    next_span = get_next_non_ws_tokens(span[-1], 5)
+    next_words = {token.text.lower() for token in next_span}
+
+    yes_words = {"yes", "y"}
+    no_words = {"no", "n"}
+    if yes_words.intersection(next_words):
+        # Check if both yes and no are in the span, in which case we don't want to do anything
+        if no_words.intersection(next_words):
+            return
+        # Otherwise, we'll consider this to be positive by removing it
+        # TODO: May want to add explicit positive modifiers
+        matches.pop(i)
+        return
+
 def ignore_current_sentence(matcher, doc, i, matches):
     """Ignore the entire sentence of a match.
     """
@@ -9,7 +40,6 @@ def ignore_current_sentence(matcher, doc, i, matches):
     sent = doc[start].sent
     for token in sent:
         token._.ignore = True
-
 
 def ignore_next_sentence(matcher, doc, i, matches):
     """Ignore the entire next sentence following a match.
@@ -50,6 +80,7 @@ def his_her_home(matcher, doc, i, matches):
         matches.pop(i)
 
 def furnished_home(matcher, doc, i, matches):
+
     match_id, start, end = matches[i]
     span = doc[start:end]
     window = span._.window(5)
@@ -58,6 +89,100 @@ def furnished_home(matcher, doc, i, matches):
         matches.pop(i)
         # print(len(matches))
         # print(doc[matches[i][1]:matches[i][2]])
+
+
+# TODO: Eventually move question/answer functions into a separate module
+def parse_question_response_next_word_homeless(matcher, doc, i, matches):
+    parse_question_response_next_word(matcher, doc, i, matches, "EVIDENCE_OF_HOMELESSNESS")
+
+def parse_question_response_next_word_housing(matcher, doc, i, matches):
+    parse_question_response_next_word(matcher, doc, i, matches, "EVIDENCE_OF_HOUSING")
+
+def parse_question_response_next_word(matcher, doc, i, matches, label="EVIDENCE_OF_HOMELESSNESS"):
+    """Check if the answer  to a question is in a predetermined list
+    of positive and negative responses. If there is a recognized
+    response, add an entity with the appropriate attributes set.
+
+    Example:
+        "Is the veteran currently homeless? No" -> EVIDENCE_OF_HOMELESSNESS, is_experienced = False
+    """
+    _, start, end = matches[i]
+    span = doc[start:end]
+    next_token = get_following_token(span)
+    if next_token is None:
+        return
+    positive_responses = ["yes", "y"]
+    negative_responses = ["no", "n"]
+
+    if next_token.text.lower() in positive_responses:
+        add_ent(doc, next_token.i, next_token.i + 1, label)
+    # elif next_token.text.lower() in negative_responses:
+    #     add_ent(doc, next_token.i, next_token.i + 1, label, {"is_experienced": False,
+    #                                                                               "ssvf_rule": None,  # TODO
+    #                                                                               })
+
+def parse_question_response_checkmark_right_yes(matcher, doc, i, matches):
+    """Removes a match if a span is NOT followed by 'Yes [X]'
+    Will return True for:
+        Veteran Meets Homeless Criteria: Yes [X] No []
+    Will return False for:
+        Veteran Meets Homeless Criteria: Yes [] No []
+    """
+    match_id, start, end = matches[i]
+    answer = parse_question_response_checkmark_right(doc[start:end])
+    print(doc[start:end])
+    print(answer)
+    if answer == False:
+        matches.pop(i)
+    else:
+        return
+
+def parse_question_response_checkmark_right_not_yes(matcher, doc, i, matches):
+    """Removes a match if a span is followed by 'Yes [X]' """
+    match_id, start, end = matches[i]
+    answer = parse_question_response_checkmark_right(doc[start:end])
+
+    if answer == True:
+
+        matches.pop(i)
+    else:
+        return
+
+
+def parse_question_response_checkmark_right(span):
+    """Returns True if the following span does not contain a positive
+    answer in the form of: 'Yes [X]'"""
+
+    start_token = span[0]
+    next_newline = get_next_token_w_newline(start_token, max_scope=30)
+
+    if next_newline is None or next_newline.i + 1 - span.end > 4:
+        following_span = get_following_span(span, 4)
+    else:
+        scope_end = next_newline.i + 1
+        following_span = span.doc[span.end:scope_end]
+    if re.search(r"Yes \[[Xx]\]", following_span.text):
+        return True
+    else:
+        return False
+
+def parse_who_wil_vet_live_with(matcher, doc, i, matches):
+    "Remove an 'EVIDENCE_OF_HOUSING' match if it is not followed by 'alone'."
+    match_id, start, end = matches.pop(i)
+    # Get the next non-whitespace
+    while True:
+        end += 1
+        try:
+            answer_token = doc[end-1]
+        except IndexError:
+            return
+        if not answer_token.is_space:
+            break
+
+
+    if answer_token.text.lower() == "alone":
+        matches.insert(i, (match_id, start, end))
+    return
 
 def add_ent(doc, start, end, label, attributes=None):
     from spacy.tokens.span import Span
@@ -104,6 +229,7 @@ def disambiguate_housing(matcher, doc, i, matches):
     # Check if words about keep housing are in the sentence
     preceding_sent = span.sent[:span.start]
     preceding_tokens = [token.text.lower() for token in preceding_sent]
+    # for word in ["maintain", "keep", "sustain", "need", "find"]:
     for word in ["maintain", "keep", "sustain", "need", "find"]:
         if word in preceding_tokens:
             return
@@ -133,6 +259,13 @@ def disambiguate_question_mark(matcher, doc, i, matches):
         matches.pop(i)
         return
 
+    # if no_words.intersection(next_words):
+    #     # Consider this to be negation
+    #     matches.pop(i)
+    #     matches.insert(i, (doc.vocab.strings["NEGATED_EXISTENCE"], start, end))
+    #     return
+
+
 def get_next_non_ws_tokens(token, window=1):
     next_tokens = []
     for next_token in token.doc[token.i+1:]:
@@ -141,6 +274,8 @@ def get_next_non_ws_tokens(token, window=1):
         if len(next_tokens) == window:
             return next_tokens
     return next_tokens
+
+
 
 def resolve_family_coreference(span):
     """See if a span containing a pronoun is preceded by a family member.
@@ -170,6 +305,7 @@ def resolve_family_coreference_false(matcher, doc, i, matches):
     if resolve_family_coreference(span):
         matches.pop(i)
 
+
 def contains_rent(matcher, doc, i, matches):
     match_id, start, end = matches[i]
     span = doc[start:end]
@@ -191,6 +327,19 @@ def permanent_housing_program(matcher, doc, i, matches):
         matches.pop(i)
         return
 
+def followed_by_issues(matcher, doc, i, matches):
+    """'does not have housing' should be considered unstable housing,
+    but 'does not have housing issues' should not be.
+    """
+    match_id, start, end = matches[i]
+    span = doc[start:end]
+
+    terms = ["issues", "problems", "issue", "problem"]
+
+    if postprocessing_functions.is_followed_by(span, terms, 2):
+        matches.pop(i)
+        return
+
 def stay_in_homeless_location(matcher, doc, i, matches):
     """Extract certain mentions of homelessness such as 'vehicle' and 'park'
     only if they're preceded by phrases such as 'staying in' or 'sleeping in'."""
@@ -207,6 +356,25 @@ def stay_in_homeless_location(matcher, doc, i, matches):
 
             return
     matches.pop(i)
+
+def questionnaire_0_match(matcher, doc, i, matches):
+    """Matches a questinnaire answer starting with a lettered bullet and ending in 0, followed by a new line.
+    If it matches, this will expand that match to include everything up to that new line. Otherwise, it will remove it.
+    """
+    match_id, start, end = matches.pop(i)
+    start_token = doc[start]
+    if not start_newline(start_token):
+        return
+    next_newline = get_next_token_w_newline(start_token, max_scope=15)
+    if next_newline is None:
+        return
+    if "0" in next_newline.text:
+        new_end = next_newline.i + 1
+    elif "0" in doc[next_newline.i-1].text:
+        new_end = next_newline.i
+    else:
+        return
+    matches.insert(i, (match_id, start, new_end))
 
 def blank_line_checkmark_match(matcher, doc, i, matches):
     """Matches a questinnaire answer starting with a lettered bullet and ending in 0, followed by a new line.
@@ -301,3 +469,4 @@ def resides_in_on_modifies(target, modifier, span_between):
             and target._.contains(r"(apartment|apt)", case_insensitive=True)):
         return False
     return True
+

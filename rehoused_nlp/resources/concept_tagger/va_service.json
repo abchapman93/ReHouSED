@@ -1,0 +1,36 @@
+{
+    "target_rules": [
+        {
+            "category": "HUD-VASH",
+            "literal": "GPD"
+        },
+        {
+            "category": "HUD-VASH",
+            "literal": "HUD"
+        },
+        {
+            "category": "HUD-VASH",
+            "literal": "HUD VASH"
+        },
+        {
+            "category": "HUD-VASH",
+            "literal": "HUD-VASH"
+        },
+        {
+            "category": "HUD-VASH",
+            "literal": "HUD/VASH"
+        },
+        {
+            "category": "HUD-VASH",
+            "literal": "VASH"
+        },
+        {
+            "category": "VA_SERVICE",
+            "literal": "HCHV"
+        },
+        {
+            "category": "VA_SERVICE",
+            "literal": "va"
+        }
+    ]
+}

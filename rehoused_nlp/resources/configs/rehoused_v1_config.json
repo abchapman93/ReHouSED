@@ -1,0 +1,46 @@
+{
+    "resources": [
+        {
+            "concept_tagger": [
+                "concept_tagger/employment.json",
+                "concept_tagger/family.json",
+                "concept_tagger/homeless.json",
+                "concept_tagger/sheltered_homeless.json",
+                "concept_tagger/unsheltered_homeless.json",
+                "concept_tagger/patient.json",
+                "concept_tagger/resides.json",
+                "concept_tagger/temporary_housing.json",
+                "concept_tagger/va_service.json"
+            ],
+            "context": [
+                "context/at_risk.json",
+                "context/current.json",
+                "context/family.json",
+                "context/historical.json",
+                "context/housing_related.json",
+                "context/hypothetical.json",
+                "context/negated_existence.json",
+                "context/other.json",
+                "context/on_match_rules.json"
+            ],
+            "sectionizer": [
+                "sectionizer/forms.json",
+                "sectionizer/section_rules.json",
+                "sectionizer/unknown.json"
+            ],
+            "target_matcher": [
+                "target_matcher/doubling_up.json",
+                "target_matcher/homeless.json",
+                "target_matcher/unsheltered_homeless.json",
+                "target_matcher/sheltered_homeless.json",
+                "target_matcher/unspecified_housing_instability.json",
+                "target_matcher/housing.json",
+                "target_matcher/other.json",
+                "target_matcher/risk.json",
+                "target_matcher/template.json",
+                "target_matcher/temporary.json",
+                "target_matcher/on_match_rules.json"
+            ]
+        }
+    ]
+}

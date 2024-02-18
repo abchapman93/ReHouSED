@@ -1,0 +1,601 @@
+{
+    "section_rules": [
+        {
+            "parent_required": false,
+            "literal": "ASSESSMENT AND PLAN:",
+            "category": "assessment_plan"
+        },
+        {
+            "parent_required": false,
+            "literal": "ASSESSMENT/PLAN:",
+            "category": "assessment_plan"
+        },
+        {
+            "parent_required": false,
+            "literal": "Assessment/Plan:",
+            "category": "assessment_plan"
+        },
+        {
+            "parent_required": false,
+            "literal": "ASSESSMENT:",
+            "category": "assessment_plan"
+        },
+        {
+            "parent_required": false,
+            "literal": "PLAN:",
+            "category": "assessment_plan"
+        },
+        {
+            "parent_required": false,
+            "literal": "Plan:",
+            "category": "assessment_plan"
+        },
+        {
+            "parent_required": false,
+            "literal": "TREATMENT PLAN:",
+            "category": "assessment_plan"
+        },
+        {
+            "parent_required": false,
+            "literal": "CC:",
+            "category": "chief_complaint"
+        },
+        {
+            "parent_required": false,
+            "literal": "Chief Complaint:",
+            "category": "chief_complaint"
+        },
+        {
+            "parent_required": false,
+            "literal": "CHIEF COMPLAINT:",
+            "category": "chief_complaint"
+        },
+        {
+            "parent_required": false,
+            "literal": "Comment:",
+            "category": "comment"
+        },
+        {
+            "parent_required": false,
+            "literal": "Comments:",
+            "category": "comment"
+        },
+        {
+            "parent_required": false,
+            "literal": "COMMENTS:",
+            "category": "comment"
+        },
+        {
+            "parent_required": false,
+            "literal": "Diagnoses:",
+            "category": "diagnosis"
+        },
+        {
+            "parent_required": false,
+            "literal": "DIAGNOSES:",
+            "category": "diagnosis"
+        },
+        {
+            "parent_required": false,
+            "literal": "Diagnosis:",
+            "category": "diagnosis"
+        },
+        {
+            "parent_required": false,
+            "literal": "DIAGNOSIS:",
+            "category": "diagnosis"
+        },
+        {
+            "parent_required": false,
+            "literal": "DX:",
+            "category": "diagnosis"
+        },
+        {
+            "parent_required": false,
+            "literal": "Dx:",
+            "category": "diagnosis"
+        },
+        {
+            "parent_required": false,
+            "literal": "FAMILY HISTORY:",
+            "category": "family_history"
+        },
+        {
+            "parent_required": false,
+            "literal": "Family History:",
+            "category": "family_history"
+        },
+        {
+            "parent_required": false,
+            "literal": "HISTORY OF PRESENT ILLNESS:",
+            "category": "history_of_present_illness"
+        },
+        {
+            "parent_required": false,
+            "literal": "HISTORY OF PRESENTING PROBLEM:",
+            "category": "history_of_present_illness"
+        },
+        {
+            "parent_required": false,
+            "literal": "PRESENTING PROBLEM:",
+            "category": "history_of_present_illness"
+        },
+        {
+            "pattern": [
+                {
+                    "LOWER": "current",
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "housing"
+                },
+                {
+                    "LOWER": "situation"
+                },
+                {
+                    "LOWER": ":"
+                }
+            ],
+            "parent_required": false,
+            "literal": "Current housing situation:",
+            "category": "housing_status"
+        },
+        {
+            "parent_required": false,
+            "literal": "Current Housing:",
+            "category": "housing_status"
+        },
+        {
+            "pattern": [
+                {
+                    "LOWER": "current"
+                },
+                {
+                    "LOWER": "living"
+                },
+                {
+                    "LOWER": "situation"
+                },
+                {
+                    "LOWER": ":"
+                }
+            ],
+            "parent_required": false,
+            "literal": "current living situation",
+            "category": "housing_status"
+        },
+        {
+            "parent_required": false,
+            "literal": "Housing Status:",
+            "category": "housing_status"
+        },
+        {
+            "parent_required": false,
+            "literal": "Living Arrangements:",
+            "category": "housing_status"
+        },
+        {
+            "pattern": [
+                {
+                    "LOWER": "living"
+                },
+                {
+                    "LOWER": "situation"
+                },
+                {
+                    "LOWER": ":"
+                }
+            ],
+            "parent_required": false,
+            "literal": "living situation:",
+            "category": "housing_status"
+        },
+        {
+            "parent_required": false,
+            "literal": "Impression:",
+            "category": "impression"
+        },
+        {
+            "parent_required": false,
+            "literal": "IMPRESSION:",
+            "category": "impression"
+        },
+        {
+            "parent_required": false,
+            "literal": "INTERVENTIONS:",
+            "category": "intertions"
+        },
+        {
+            "parent_required": false,
+            "literal": "LOCATION:",
+            "category": "location"
+        },
+        {
+            "parent_required": false,
+            "literal": "Behavior:",
+            "category": "mental_status"
+        },
+        {
+            "parent_required": false,
+            "literal": "MENTAL HEALTH DIAGNOSES AND RELEVANT MEDICAL CONDITIONS:",
+            "category": "mental_status"
+        },
+        {
+            "parent_required": false,
+            "literal": "MENTAL STATUS EXAM:",
+            "category": "mental_status"
+        },
+        {
+            "parent_required": false,
+            "literal": "Mental Status:",
+            "category": "mental_status"
+        },
+        {
+            "parent_required": false,
+            "literal": "MENTAL STATUS:",
+            "category": "mental_status"
+        },
+        {
+            "parent_required": false,
+            "literal": "PSYCH:",
+            "category": "mental_status"
+        },
+        {
+            "parent_required": false,
+            "literal": "Thought content:",
+            "category": "mental_status"
+        },
+        {
+            "parent_required": false,
+            "literal": "THOUGHT PROCESS:",
+            "category": "mental_status"
+        },
+        {
+            "parent_required": false,
+            "literal": "OBJECTIVE:",
+            "category": "objective"
+        },
+        {
+            "parent_required": false,
+            "literal": "BRIEF CLINICAL HISTORY:",
+            "category": "past_medical_history"
+        },
+        {
+            "parent_required": false,
+            "literal": "CLINICAL HISTORY:",
+            "category": "past_medical_history"
+        },
+        {
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "homeless"
+                    }
+                },
+                {
+                    "LOWER": "history"
+                }
+            ],
+            "parent_required": false,
+            "literal": "Homeless History:",
+            "category": "past_medical_history"
+        },
+        {
+            "pattern": "medical problems:?\\n",
+            "parent_required": false,
+            "literal": "Medical Problems:",
+            "category": "past_medical_history"
+        },
+        {
+            "parent_required": false,
+            "literal": "PAST HISTORY:",
+            "category": "past_medical_history"
+        },
+        {
+            "parent_required": false,
+            "literal": "Past Medical History:",
+            "category": "past_medical_history"
+        },
+        {
+            "parent_required": false,
+            "literal": "PAST SURGICAL HISTORY:",
+            "category": "past_medical_history"
+        },
+        {
+            "parent_required": false,
+            "literal": "Patient History:",
+            "category": "past_medical_history"
+        },
+        {
+            "parent_required": false,
+            "literal": "PMH:",
+            "category": "past_medical_history"
+        },
+        {
+            "parent_required": false,
+            "literal": "PMHx:",
+            "category": "past_medical_history"
+        },
+        {
+            "parent_required": false,
+            "literal": "Education Topic:",
+            "category": "patient_education"
+        },
+        {
+            "parent_required": false,
+            "literal": "Education:",
+            "category": "patient_education"
+        },
+        {
+            "parent_required": false,
+            "literal": "EDUCATION:",
+            "category": "patient_education"
+        },
+        {
+            "parent_required": false,
+            "literal": "PATIENT EDUCATION:",
+            "category": "patient_education"
+        },
+        {
+            "parent_required": false,
+            "literal": "Patient education:",
+            "category": "patient_education"
+        },
+        {
+            "parent_required": false,
+            "literal": "Goal:",
+            "category": "patient_goals"
+        },
+        {
+            "parent_required": false,
+            "literal": "GOAL:",
+            "category": "patient_goals"
+        },
+        {
+            "parent_required": false,
+            "literal": "GOALS:",
+            "category": "patient_goals"
+        },
+        {
+            "parent_required": false,
+            "literal": "Goals:",
+            "category": "patient_goals"
+        },
+        {
+            "parent_required": false,
+            "literal": "Long Term Goals:",
+            "category": "patient_goals"
+        },
+        {
+            "parent_required": false,
+            "literal": "OBJECTIVE:",
+            "category": "patient_goals"
+        },
+        {
+            "parent_required": false,
+            "literal": "OBJECTIVES:",
+            "category": "patient_goals"
+        },
+        {
+            "parent_required": false,
+            "literal": "Short Term Goals:",
+            "category": "patient_goals"
+        },
+        {
+            "pattern": "DISCHARGE INSTRUCTIONS:?\\n",
+            "parent_required": false,
+            "literal": "DISCHARGE INSTRUCTIONS",
+            "category": "patient_instructions"
+        },
+        {
+            "parent_required": false,
+            "literal": "Discharge instructions:",
+            "category": "patient_instructions"
+        },
+        {
+            "parent_required": false,
+            "literal": "Discussion/Instructions:",
+            "category": "patient_instructions"
+        },
+        {
+            "parent_required": false,
+            "literal": "DEFERRED PROBLEMS:",
+            "category": "patient_needs"
+        },
+        {
+            "parent_required": false,
+            "literal": "Have you had any recent stressful event in your life, such as medical, financial, housing, employment, legal, or personal relationship, that is impacting you in a negative way?",
+            "category": "patient_needs"
+        },
+        {
+            "parent_required": false,
+            "literal": "NEEDS:",
+            "category": "patient_needs"
+        },
+        {
+            "pattern": [
+                {
+                    "TEXT": {
+                        "REGEX": "Needs"
+                    }
+                },
+                {
+                    "LOWER": ":"
+                }
+            ],
+            "parent_required": false,
+            "literal": "Needs:",
+            "category": "patient_needs"
+        },
+        {
+            "parent_required": false,
+            "literal": "Patient Needs:",
+            "category": "patient_needs"
+        },
+        {
+            "parent_required": false,
+            "literal": "PATIENT'S LIMITATIONS:",
+            "category": "patient_needs"
+        },
+        {
+            "parent_required": false,
+            "literal": "stressors:",
+            "category": "patient_needs"
+        },
+        {
+            "pattern": "Weaknesses:?\\n",
+            "parent_required": false,
+            "literal": "Weaknesses",
+            "category": "patient_needs"
+        },
+        {
+            "parent_required": false,
+            "literal": "STRENGTHS/ABILITIES:",
+            "category": "patient_strengths"
+        },
+        {
+            "parent_required": false,
+            "literal": "Strengths:",
+            "category": "patient_strengths"
+        },
+        {
+            "parent_required": false,
+            "literal": "STRENGTHS:",
+            "category": "patient_strengths"
+        },
+        {
+            "parent_required": false,
+            "literal": "PHYSICAL EXAM:",
+            "category": "physical_exam"
+        },
+        {
+            "pattern": "\\nActive Problem\\n",
+            "parent_required": false,
+            "literal": "Active Problem",
+            "category": "problem_list"
+        },
+        {
+            "parent_required": false,
+            "literal": "ACTIVE PROBLEM LIST",
+            "category": "problem_list"
+        },
+        {
+            "parent_required": false,
+            "literal": "ACTIVE PROBLEM(S):",
+            "category": "problem_list"
+        },
+        {
+            "parent_required": false,
+            "literal": "ACTIVE PROBLEMS:",
+            "category": "problem_list"
+        },
+        {
+            "parent_required": false,
+            "literal": "Active Problems:",
+            "category": "problem_list"
+        },
+        {
+            "parent_required": false,
+            "literal": "Computerized Problem List",
+            "category": "problem_list"
+        },
+        {
+            "parent_required": false,
+            "literal": "Computerized Problem List is the source for the following:",
+            "category": "problem_list"
+        },
+        {
+            "parent_required": false,
+            "literal": "PROBLEM LIST:",
+            "category": "problem_list"
+        },
+        {
+            "parent_required": false,
+            "literal": "Problem:",
+            "category": "problem_list"
+        },
+        {
+            "parent_required": false,
+            "literal": "PROBLEM:",
+            "category": "problem_list"
+        },
+        {
+            "parent_required": false,
+            "literal": "REASON FOR VISIT:",
+            "category": "reason_for_visit"
+        },
+        {
+            "parent_required": false,
+            "literal": "RECOMMENDATIONS:",
+            "category": "recommendations"
+        },
+        {
+            "parent_required": false,
+            "literal": "Recommendations:",
+            "category": "recommendations"
+        },
+        {
+            "parent_required": false,
+            "literal": "Sleep:",
+            "category": "sleep"
+        },
+        {
+            "parent_required": false,
+            "literal": "Marital Status:",
+            "category": "social_history"
+        },
+        {
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "social",
+                            "soc"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "hx",
+                            "history"
+                        ]
+                    }
+                }
+            ],
+            "parent_required": false,
+            "literal": "Social History",
+            "category": "social_history"
+        },
+        {
+            "parent_required": false,
+            "literal": "Social History:",
+            "category": "social_history"
+        },
+        {
+            "parent_required": false,
+            "literal": "SUBJECTIVE:",
+            "category": "subjective"
+        },
+        {
+            "parent_required": false,
+            "literal": "Subjective:",
+            "category": "subjective"
+        },
+        {
+            "parent_required": false,
+            "literal": "SUICIDE RISK SCREEN:",
+            "category": "suicide_screen"
+        },
+        {
+            "parent_required": false,
+            "literal": "Summary:",
+            "category": "summary"
+        },
+        {
+            "parent_required": false,
+            "literal": "Topic:",
+            "category": "topic"
+        }
+    ]
+}

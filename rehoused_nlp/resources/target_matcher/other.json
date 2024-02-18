@@ -1,0 +1,747 @@
+{
+    "target_rules": [
+        {
+            "category": "HOMELESSNESS_HEALTHCARE_SERVICE",
+            "literal": "Domiciliary Care for Homeless Veterans"
+        },
+        {
+            "category": "HOMELESSNESS_HEALTHCARE_SERVICE",
+            "literal": "hchv"
+        },
+        {
+            "category": "HOMELESSNESS_HEALTHCARE_SERVICE",
+            "literal": "health care for homeless veterans"
+        },
+        {
+            "category": "HOMELESSNESS_HEALTHCARE_SERVICE",
+            "literal": "homeless clinic"
+        },
+        {
+            "category": "HOMELESSNESS_HEALTHCARE_SERVICE",
+            "literal": "homeless hotline"
+        },
+        {
+            "category": "HOMELESSNESS_HEALTHCARE_SERVICE",
+            "literal": "homeless resources",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "homeless"
+                    }
+                },
+                {
+                    "LEMMA": "resource"
+                }
+            ]
+        },
+        {
+            "category": "HOMELESSNESS_HEALTHCARE_SERVICE",
+            "literal": "homeless vulnerability assessment"
+        },
+        {
+            "category": "HOMELESSNESS_HEALTHCARE_SERVICE",
+            "literal": "homelessness prevention",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "^homeless"
+                    }
+                },
+                {
+                    "LOWER": "prevention"
+                }
+            ]
+        },
+        {
+            "category": "HOMELESSNESS_HEALTHCARE_SERVICE",
+            "literal": "housing program"
+        },
+        {
+            "category": "HOMELESSNESS_HEALTHCARE_SERVICE",
+            "literal": "housing/homeless service",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "homeless",
+                            "housing",
+                            "housing/homeless"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": {
+                        "REGEX": "service"
+                    }
+                }
+            ]
+        },
+        {
+            "category": "HOMELESSNESS_HEALTHCARE_SERVICE",
+            "literal": "GPD"
+        },
+        {
+            "category": "HOMELESSNESS_HEALTHCARE_SERVICE",
+            "literal": "GPD",
+            "pattern": [
+                {
+                    "LOWER": "grant"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "&",
+                            "and"
+                        ]
+                    },
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "per"
+                },
+                {
+                    "LOWER": "diem"
+                }
+            ]
+        },
+        {
+            "category": "HOMELESSNESS_HEALTHCARE_SERVICE",
+            "literal": "hud-vash"
+        },
+        {
+            "category": "HOMELESSNESS_HEALTHCARE_SERVICE",
+            "literal": "hud/vash"
+        },
+        {
+            "category": "HOMELESSNESS_HEALTHCARE_SERVICE",
+            "literal": "rapid re-housing"
+        },
+        {
+            "category": "HOMELESSNESS_HEALTHCARE_SERVICE",
+            "literal": "rapid rehousing"
+        },
+        {
+            "category": "HOMELESSNESS_HEALTHCARE_SERVICE",
+            "literal": "ssvf"
+        },
+        {
+            "category": "HOMELESSNESS_HEALTHCARE_SERVICE",
+            "literal": "vash"
+        },
+        {
+            "category": "HOMELESSNESS_HEALTHCARE_SERVICE",
+            "literal": "VETERANS ADMINISTRATION SUBSIDIZED HOUSING"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "(intensive case management with permanent housing)"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "<DET> housing situation",
+            "pattern": [
+                {
+                    "POS": "DET"
+                },
+                {
+                    "LOWER": "housing"
+                },
+                {
+                    "LOWER": "situation"
+                }
+            ]
+        },
+        {
+            "category": "IGNORE",
+            "literal": "<PRON> housing voucher",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "his",
+                            "my",
+                            "a",
+                            "her"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "housing"
+                },
+                {
+                    "LOWER": "voucher"
+                }
+            ]
+        },
+        {
+            "category": "IGNORE",
+            "literal": "___ Homeless"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "affordable housing"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "apartment costs"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "apartment management"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "apartment manager"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "Center for X Homeless",
+            "pattern": [
+                {
+                    "LOWER": "center"
+                },
+                {
+                    "LOWER": "for"
+                },
+                {
+                    "LOWER": "the",
+                    "OP": "?"
+                },
+                {
+                    "OP": "?"
+                },
+                {
+                    "LOWER": {
+                        "REGEX": "homeless"
+                    }
+                }
+            ]
+        },
+        {
+            "category": "IGNORE",
+            "literal": "discharge to home",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "discharge",
+                            "discharged"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "to"
+                },
+                {
+                    "LOWER": "home"
+                }
+            ]
+        },
+        {
+            "category": "IGNORE",
+            "literal": "group home"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "health care for homeless veterans contact form",
+            "pattern": [
+                {
+                    "LOWER": "health"
+                },
+                {
+                    "LOWER": "care"
+                },
+                {
+                    "LOWER": "for"
+                },
+                {
+                    "LOWER": "homeless"
+                },
+                {
+                    "LOWER": "veterans",
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "contact",
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "form"
+                }
+            ]
+        },
+        {
+            "category": "IGNORE",
+            "literal": "healthcare for homeless veterans"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "home phone number",
+            "pattern": [
+                {
+                    "_": {
+                        "concept_tag": "PATIENT"
+                    },
+                    "OP": "*"
+                },
+                {
+                    "LOWER": "home"
+                },
+                {
+                    "LOWER": "phone"
+                },
+                {
+                    "LOWER": "number",
+                    "OP": "?"
+                }
+            ]
+        },
+        {
+            "category": "IGNORE",
+            "literal": "homeless assessment"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "homeless call center"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "homeless case management"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "Homeless for Vets",
+            "pattern": [
+                {
+                    "LOWER": "homeless"
+                },
+                {
+                    "OP": "?",
+                    "POS": "NOUN"
+                },
+                {
+                    "LOWER": "for"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "veteran",
+                            "veterans",
+                            "vets"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "category": "IGNORE",
+            "literal": "homeless outreach"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "homeless people"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "homeless population"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "homeless program",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "^homeless"
+                    }
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "program",
+                            "programs"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "category": "IGNORE",
+            "literal": "homeless staff"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "homeless sud worker"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "homeless team"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "homeless veteran team"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "homeless veterans",
+            "pattern": [
+                {
+                    "LOWER": "homeless"
+                },
+                {
+                    "LOWER": "veterans"
+                }
+            ]
+        },
+        {
+            "category": "IGNORE",
+            "literal": "homeless women"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "Homeless Xxxx",
+            "pattern": [
+                {
+                    "IS_TITLE": true,
+                    "OP": "?"
+                },
+                {
+                    "TEXT": {
+                        "IN": [
+                            "Homeless",
+                            "Homelessness"
+                        ]
+                    }
+                },
+                {
+                    "IS_TITLE": true,
+                    "OP": "+"
+                }
+            ]
+        },
+        {
+            "category": "IGNORE",
+            "literal": "Homeless Xxxx Program",
+            "pattern": [
+                {
+                    "TEXT": "Homeless"
+                },
+                {
+                    "IS_TITLE": true,
+                    "OP": "+"
+                },
+                {
+                    "TEXT": "Program"
+                }
+            ]
+        },
+        {
+            "category": "IGNORE",
+            "literal": "homelessness/food insecurity screen:"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "house sitting",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "house",
+                            "home"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "-",
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "sitting"
+                }
+            ]
+        },
+        {
+            "category": "IGNORE",
+            "literal": "house staff"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "housing access"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "housing arrangement"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "housing assistant"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "housing authority"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "housing authority"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "housing case manager"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "housing choice",
+            "pattern": [
+                {
+                    "LOWER": "housing"
+                },
+                {
+                    "LEMMA": "choice"
+                }
+            ]
+        },
+        {
+            "category": "IGNORE",
+            "literal": "housing clinic"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "Housing First"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "housing group"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "housing needs"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "housing opportunity"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "housing outreach"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "housing plans"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "housing process"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "housing resources"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "housing situation"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "housing specialist"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "housing stability"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "housing status"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "housing team"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "housing voucher"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "IGNORE",
+            "pattern": [
+                {
+                    "_": {
+                        "ignore": true
+                    },
+                    "OP": "+"
+                }
+            ]
+        },
+        {
+            "category": "IGNORE",
+            "literal": "in-house",
+            "pattern": [
+                {
+                    "LOWER": "in"
+                },
+                {
+                    "LOWER": "-",
+                    "OP": "?"
+                },
+                {
+                    "LOWER": "house"
+                }
+            ]
+        },
+        {
+            "category": "IGNORE",
+            "literal": "medical, financial, housing, employment, legal, or personal relationship,"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "Number of related adults (including adult children) who live in the apartment"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "Number of the Veteran?s children under the age of 18 who live in the apartment"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "Number of unrelated adults who live in the apartment"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "pay your rent"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "re housing"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "resources for the homeless"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "services for the homeless"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "sustainable housing"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "The amount saved per month should be at least as great as what the veteran expects to pay in rent once housed."
+        },
+        {
+            "category": "IGNORE",
+            "literal": "the apartment complex"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "URL",
+            "pattern": [
+                {
+                    "LIKE_URL": true
+                }
+            ]
+        },
+        {
+            "category": "IGNORE",
+            "literal": "va homeless"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "Veteran reports that being in VA housing (0) in the past."
+        },
+        {
+            "category": "IGNORE",
+            "literal": "Veteran's Home Address"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "Veteran's housing arrangement"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "VETERAN'S HOUSING GOAL:"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "Veteran's Place of Birth"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "vha homeless"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "was there a time when he or she was homeless, living on the street or in a shelter?",
+            "pattern": "was there a time when he or she was homeless, living on the street or in a shelter\\?"
+        },
+        {
+            "category": "IGNORE",
+            "literal": "Xxxx Homeless Xxxx",
+            "pattern": [
+                {
+                    "IS_TITLE": true,
+                    "OP": "+"
+                },
+                {
+                    "TEXT": {
+                        "IN": [
+                            "Homeless",
+                            "Homelessness"
+                        ]
+                    }
+                },
+                {
+                    "IS_TITLE": true,
+                    "OP": "?"
+                }
+            ]
+        },
+        {
+            "category": "KNOWN_ORG",
+            "literal": "HOUSE INC."
+        },
+        {
+            "category": "MAYBE_RELEVANT",
+            "literal": "Discharge to:"
+        },
+        {
+            "category": "MAYBE_RELEVANT",
+            "literal": "where he lives",
+            "pattern": [
+                {
+                    "LOWER": "where"
+                },
+                {
+                    "LOWER": {
+                        "IN": [
+                            "he",
+                            "she"
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "lives"
+                }
+            ]
+        },
+        {
+            "category": "SOCIAL_RISK_FACTOR",
+            "literal": "lack of social support"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "have you been living in stable housing that you own, rent,"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "Homeless PACT"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "Homeless/Flu/Ten"
+        },
+        {
+            "category": "TEMPLATE",
+            "literal": "Total program fee (rent) paid since entry to the TR"
+        }
+    ]
+}

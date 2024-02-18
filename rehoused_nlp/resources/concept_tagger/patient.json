@@ -1,0 +1,52 @@
+{
+    "target_rules": [
+        {
+            "category": "PATIENT",
+            "literal": "patient",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "patient",
+                            "pt",
+                            "pt."
+                        ]
+                    }
+                },
+                {
+                    "LOWER": "'s",
+                    "OP": "?"
+                }
+            ]
+        },
+        {
+            "category": "PATIENT",
+            "literal": "patient",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "IN": [
+                            "my",
+                            "me"
+                        ]
+                    }
+                }
+            ]
+        },
+        {
+            "category": "PATIENT",
+            "literal": "veteran",
+            "pattern": [
+                {
+                    "LOWER": {
+                        "REGEX": "^vet(eran)?"
+                    }
+                },
+                {
+                    "LOWER": "'s",
+                    "OP": "?"
+                }
+            ]
+        }
+    ]
+}
